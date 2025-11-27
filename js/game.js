@@ -746,8 +746,8 @@ class Game {
      * This prevents blocks from "jumping" over obstacles
      */
     updateValidDragPosition(block, targetX, targetY) {
-        // Move step by step toward target, stopping when we can't move further
-        const maxIterations = Math.abs(targetX - this.lastValidGridX) + Math.abs(targetY - this.lastValidGridY) + 1;
+        // Limit iterations to prevent performance issues with large drags
+        const maxIterations = 50;
         
         for (let i = 0; i < maxIterations; i++) {
             const dx = targetX - this.lastValidGridX;
@@ -756,41 +756,47 @@ class Game {
             // If we've reached the target, stop
             if (dx === 0 && dy === 0) break;
             
-            // Try to move one step closer (prioritize larger delta)
-            let nextX = this.lastValidGridX;
-            let nextY = this.lastValidGridY;
+            // Try primary direction first (larger delta), then alternate
+            const primaryHorizontal = Math.abs(dx) >= Math.abs(dy);
+            const nextPos = this.tryMoveInDirection(block, dx, dy, primaryHorizontal);
             
-            // Choose the direction to move (move in the direction with larger delta first)
-            if (Math.abs(dx) >= Math.abs(dy) && dx !== 0) {
-                nextX += (dx > 0 ? 1 : -1);
-            } else if (dy !== 0) {
-                nextY += (dy > 0 ? 1 : -1);
-            }
-            
-            // Check if we can move to this position
-            if (this.board.canBlockMoveTo(block, nextX, nextY)) {
-                this.lastValidGridX = nextX;
-                this.lastValidGridY = nextY;
+            if (nextPos) {
+                this.lastValidGridX = nextPos.x;
+                this.lastValidGridY = nextPos.y;
             } else {
-                // Try moving in the other direction if the first choice was blocked
-                nextX = this.lastValidGridX;
-                nextY = this.lastValidGridY;
-                
-                if (Math.abs(dx) >= Math.abs(dy) && dy !== 0) {
-                    nextY += (dy > 0 ? 1 : -1);
-                } else if (dx !== 0) {
-                    nextX += (dx > 0 ? 1 : -1);
-                }
-                
-                if (this.board.canBlockMoveTo(block, nextX, nextY)) {
-                    this.lastValidGridX = nextX;
-                    this.lastValidGridY = nextY;
+                // Try alternate direction
+                const altPos = this.tryMoveInDirection(block, dx, dy, !primaryHorizontal);
+                if (altPos) {
+                    this.lastValidGridX = altPos.x;
+                    this.lastValidGridY = altPos.y;
                 } else {
                     // Can't move in either direction, stop
                     break;
                 }
             }
         }
+    }
+
+    /**
+     * Try to move the block one step in the specified direction
+     * @returns {object|null} New position {x, y} if valid, null if blocked
+     */
+    tryMoveInDirection(block, dx, dy, horizontal) {
+        let nextX = this.lastValidGridX;
+        let nextY = this.lastValidGridY;
+        
+        if (horizontal && dx !== 0) {
+            nextX += (dx > 0 ? 1 : -1);
+        } else if (!horizontal && dy !== 0) {
+            nextY += (dy > 0 ? 1 : -1);
+        } else {
+            return null;
+        }
+        
+        if (this.board.canBlockMoveTo(block, nextX, nextY)) {
+            return { x: nextX, y: nextY };
+        }
+        return null;
     }
 
     /**
