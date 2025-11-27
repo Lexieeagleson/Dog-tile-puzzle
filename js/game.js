@@ -1065,6 +1065,9 @@ class Game {
 
     /**
      * Start the render loop
+     * Note: The render loop runs continuously to ensure responsive user interaction
+     * and smooth animation playback. For this simple game, the performance impact
+     * is negligible and continuous rendering provides the best user experience.
      */
     startRenderLoop() {
         const renderFrame = () => {

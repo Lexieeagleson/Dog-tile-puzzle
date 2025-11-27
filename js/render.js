@@ -3,6 +3,11 @@
  * Handles drawing the game board and all entities
  */
 
+// Rendering configuration constants
+const RENDER_CONFIG = {
+    ANIMATION_SPEED: 0.15  // Animation progress per frame (higher = faster animation)
+};
+
 class Renderer {
     constructor(canvas) {
         this.canvas = canvas;
@@ -107,11 +112,9 @@ class Renderer {
      * Update smooth movement animations (progress from 0 to 1)
      */
     updateMovementAnimations() {
-        const animationSpeed = 0.15; // Higher = faster animation
-        
         // Update block animations
         for (const [blockId, anim] of this.animatingBlocks) {
-            anim.progress += animationSpeed;
+            anim.progress += RENDER_CONFIG.ANIMATION_SPEED;
             if (anim.progress >= 1) {
                 this.animatingBlocks.delete(blockId);
             }
@@ -119,7 +122,7 @@ class Renderer {
         
         // Update obstacle animations
         for (const [obstacleId, anim] of this.animatingObstacles) {
-            anim.progress += animationSpeed;
+            anim.progress += RENDER_CONFIG.ANIMATION_SPEED;
             if (anim.progress >= 1) {
                 this.animatingObstacles.delete(obstacleId);
             }

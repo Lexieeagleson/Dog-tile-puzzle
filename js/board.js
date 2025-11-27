@@ -3,6 +3,9 @@
  * Manages the game board grid and collision detection
  */
 
+// Counter for generating unique obstacle IDs
+let obstacleIdCounter = 0;
+
 /**
  * Obstacle class - Represents a movable obstacle (wall) on the board
  */
@@ -10,7 +13,8 @@ class Obstacle {
     constructor(config) {
         this.x = config.x;
         this.y = config.y;
-        this.id = `obstacle_${config.x}_${config.y}`;
+        // Use a stable unique ID that doesn't change when position changes
+        this.id = config.id || `obstacle_${obstacleIdCounter++}`;
     }
 
     /**
@@ -33,6 +37,7 @@ class Obstacle {
      */
     serialize() {
         return {
+            id: this.id,
             x: this.x,
             y: this.y
         };
