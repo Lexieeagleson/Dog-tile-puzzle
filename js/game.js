@@ -510,6 +510,8 @@ class Game {
         this.isDragging = false;
         this.dragX = 0;
         this.dragY = 0;
+        this.lastValidGridX = 0;
+        this.lastValidGridY = 0;
         this.animationFrame = null;
         
         // DOM Elements
@@ -710,6 +712,9 @@ class Game {
             this.isDragging = true;
             this.dragX = coords.x;
             this.dragY = coords.y;
+            // Track the last valid grid position (starts at block's current position)
+            this.lastValidGridX = block.x;
+            this.lastValidGridY = block.y;
         }
     }
 
@@ -719,9 +724,79 @@ class Game {
     handleMouseMove(e) {
         if (this.isDragging && this.renderer.getSelectedBlock()) {
             const coords = this.getCanvasCoords(e);
-            this.dragX = coords.x;
-            this.dragY = coords.y;
+            const block = this.renderer.getSelectedBlock();
+            
+            // Calculate target grid position
+            const targetGridPos = this.renderer.pixelToGrid(
+                coords.x - this.renderer.dragOffset.x,
+                coords.y - this.renderer.dragOffset.y
+            );
+            
+            // Update the last valid position by following a valid path
+            this.updateValidDragPosition(block, targetGridPos.x, targetGridPos.y);
+            
+            // Update dragX/dragY to render at the constrained position
+            this.dragX = this.lastValidGridX * this.renderer.tileSize + this.renderer.dragOffset.x;
+            this.dragY = this.lastValidGridY * this.renderer.tileSize + this.renderer.dragOffset.y;
         }
+    }
+
+    /**
+     * Update the valid drag position by moving step-by-step toward the target
+     * This prevents blocks from "jumping" over obstacles
+     */
+    updateValidDragPosition(block, targetX, targetY) {
+        // Limit iterations to prevent performance issues with large drags
+        const maxIterations = 50;
+        
+        for (let i = 0; i < maxIterations; i++) {
+            const dx = targetX - this.lastValidGridX;
+            const dy = targetY - this.lastValidGridY;
+            
+            // If we've reached the target, stop
+            if (dx === 0 && dy === 0) break;
+            
+            // Try primary direction first (larger delta), then alternate
+            const primaryHorizontal = Math.abs(dx) >= Math.abs(dy);
+            const nextPos = this.tryMoveInDirection(block, dx, dy, primaryHorizontal);
+            
+            if (nextPos) {
+                this.lastValidGridX = nextPos.x;
+                this.lastValidGridY = nextPos.y;
+            } else {
+                // Try alternate direction
+                const altPos = this.tryMoveInDirection(block, dx, dy, !primaryHorizontal);
+                if (altPos) {
+                    this.lastValidGridX = altPos.x;
+                    this.lastValidGridY = altPos.y;
+                } else {
+                    // Can't move in either direction, stop
+                    break;
+                }
+            }
+        }
+    }
+
+    /**
+     * Try to move the block one step in the specified direction
+     * @returns {object|null} New position {x, y} if valid, null if blocked
+     */
+    tryMoveInDirection(block, dx, dy, horizontal) {
+        let nextX = this.lastValidGridX;
+        let nextY = this.lastValidGridY;
+        
+        if (horizontal && dx !== 0) {
+            nextX += (dx > 0 ? 1 : -1);
+        } else if (!horizontal && dy !== 0) {
+            nextY += (dy > 0 ? 1 : -1);
+        } else {
+            return null;
+        }
+        
+        if (this.board.canBlockMoveTo(block, nextX, nextY)) {
+            return { x: nextX, y: nextY };
+        }
+        return null;
     }
 
     /**
@@ -749,6 +824,9 @@ class Game {
                 this.isDragging = true;
                 this.dragX = coords.x;
                 this.dragY = coords.y;
+                // Track the last valid grid position (starts at block's current position)
+                this.lastValidGridX = block.x;
+                this.lastValidGridY = block.y;
             }
         }
     }
@@ -761,8 +839,20 @@ class Game {
         if (this.isDragging && e.touches.length === 1 && this.renderer.getSelectedBlock()) {
             const touch = e.touches[0];
             const coords = this.getCanvasCoords(touch);
-            this.dragX = coords.x;
-            this.dragY = coords.y;
+            const block = this.renderer.getSelectedBlock();
+            
+            // Calculate target grid position
+            const targetGridPos = this.renderer.pixelToGrid(
+                coords.x - this.renderer.dragOffset.x,
+                coords.y - this.renderer.dragOffset.y
+            );
+            
+            // Update the last valid position by following a valid path
+            this.updateValidDragPosition(block, targetGridPos.x, targetGridPos.y);
+            
+            // Update dragX/dragY to render at the constrained position
+            this.dragX = this.lastValidGridX * this.renderer.tileSize + this.renderer.dragOffset.x;
+            this.dragY = this.lastValidGridY * this.renderer.tileSize + this.renderer.dragOffset.y;
         }
     }
 
@@ -811,17 +901,15 @@ class Game {
         const block = this.renderer.getSelectedBlock();
         if (!block) return;
         
-        // Calculate target grid position
-        const gridPos = this.renderer.pixelToGrid(
-            this.dragX - this.renderer.dragOffset.x,
-            this.dragY - this.renderer.dragOffset.y
-        );
+        // Use the last valid grid position (constrained by path-finding during drag)
+        const gridX = this.lastValidGridX;
+        const gridY = this.lastValidGridY;
         
         // Only save state if position actually changes
-        if (gridPos.x !== block.x || gridPos.y !== block.y) {
-            if (this.board.canBlockMoveTo(block, gridPos.x, gridPos.y)) {
+        if (gridX !== block.x || gridY !== block.y) {
+            if (this.board.canBlockMoveTo(block, gridX, gridY)) {
                 this.saveState();
-                const result = this.board.moveBlock(block, gridPos.x, gridPos.y);
+                const result = this.board.moveBlock(block, gridX, gridY);
                 
                 if (result.success) {
                     // Handle rescues
