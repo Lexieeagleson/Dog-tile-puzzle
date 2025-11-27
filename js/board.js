@@ -73,6 +73,15 @@ class Board {
             if (this.isOccupiedByBlock(x, y, block.id)) {
                 return false;
             }
+            // Check for dogs that the block cannot rescue
+            const dog = this.dogManager.getDogAt(x, y);
+            if (dog && !dog.canBeRescuedBy(block.color)) {
+                return false;
+            }
+            // Check if block has already rescued all required dogs
+            if (dog && block.isComplete()) {
+                return false;
+            }
         }
         
         return true;
@@ -97,6 +106,11 @@ class Board {
             if (!this.isInBounds(x, y)) return false;
             if (this.isWall(x, y)) return false;
             if (this.isOccupiedByBlock(x, y, block.id)) return false;
+            // Check for dogs that the block cannot rescue
+            const dog = this.dogManager.getDogAt(x, y);
+            if (dog && !dog.canBeRescuedBy(block.color)) return false;
+            // Check if block has already rescued all required dogs
+            if (dog && block.isComplete()) return false;
         }
         
         return true;
