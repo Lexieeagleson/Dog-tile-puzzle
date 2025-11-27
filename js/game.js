@@ -40,8 +40,8 @@ const LEVELS = [
     // Level 2 - Two colors
     {
         name: "Level 2",
-        width: 7,
-        height: 7,
+        width: 8,
+        height: 8,
         blocks: [
             {
                 id: "r1",
@@ -60,16 +60,16 @@ const LEVELS = [
                 shape: "I",
                 coords: [[0, 0], [1, 0], [2, 0], [3, 0]],
                 x: 2,
-                y: 5,
+                y: 6,
                 rotatable: true
             }
         ],
         dogs: [
-            { color: "red", x: 5, y: 2 },
-            { color: "blue", x: 3, y: 2 }
+            { color: "red", x: 6, y: 2 },
+            { color: "blue", x: 4, y: 2 }
         ],
         walls: [
-            { x: 3, y: 3 }, { x: 4, y: 3 }
+            { x: 5, y: 4 }, { x: 6, y: 4 }
         ]
     },
     // Level 3 - More dogs per block
@@ -615,6 +615,15 @@ class Game {
         // Load the level
         this.board.loadLevel(levelData);
         this.renderer.setBoard(this.board);
+        
+        // Validate level solvability - ensure blocks have enough space to navigate obstacles
+        const validation = this.board.validateLevel();
+        if (!validation.valid) {
+            console.warn(`Level ${levelIndex + 1} validation issues:`);
+            for (const issue of validation.issues) {
+                console.warn(`  - ${issue.message}`);
+            }
+        }
         
         // Adjust tile size based on board dimensions
         const maxSize = Math.min(
