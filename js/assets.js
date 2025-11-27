@@ -30,20 +30,40 @@ const ASSETS = {
         }
     },
 
-    // Generate SVG block tile
+    // Generate SVG block tile - streamlined sleek design
     generateBlockTile: function(color, number) {
         const c = this.colors[color] || this.colors.red;
         const svg = `
             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50">
                 <defs>
-                    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <linearGradient id="mainGrad" x1="0%" y1="0%" x2="0%" y2="100%">
                         <stop offset="0%" style="stop-color:${c.light};stop-opacity:1" />
+                        <stop offset="50%" style="stop-color:${c.main};stop-opacity:1" />
                         <stop offset="100%" style="stop-color:${c.dark};stop-opacity:1" />
                     </linearGradient>
+                    <linearGradient id="gloss" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:white;stop-opacity:0.4" />
+                        <stop offset="50%" style="stop-color:white;stop-opacity:0.1" />
+                        <stop offset="100%" style="stop-color:white;stop-opacity:0" />
+                    </linearGradient>
+                    <clipPath id="blockClip">
+                        <rect x="3" y="3" width="44" height="44" rx="8"/>
+                    </clipPath>
+                    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+                        <feDropShadow dx="0" dy="1" stdDeviation="1" flood-opacity="0.3"/>
+                    </filter>
                 </defs>
-                <rect x="2" y="2" width="46" height="46" rx="5" fill="url(#grad)" stroke="${c.dark}" stroke-width="2"/>
-                <rect x="6" y="6" width="38" height="38" rx="3" fill="${c.main}" opacity="0.8"/>
-                ${number ? `<text x="25" y="33" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="white" text-anchor="middle" stroke="${c.dark}" stroke-width="1">${number}</text>` : ''}
+                <!-- Main block body -->
+                <rect x="3" y="3" width="44" height="44" rx="8" fill="url(#mainGrad)" filter="url(#shadow)"/>
+                <!-- Glossy overlay for sleek look, clipped to block shape -->
+                <rect x="3" y="3" width="44" height="22" fill="url(#gloss)" clip-path="url(#blockClip)"/>
+                <!-- Inner highlight border -->
+                <rect x="5" y="5" width="40" height="40" rx="6" fill="none" stroke="${c.light}" stroke-width="1" opacity="0.5"/>
+                ${number ? `
+                <!-- Number badge -->
+                <circle cx="25" cy="28" r="12" fill="rgba(0,0,0,0.25)"/>
+                <text x="25" y="33" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">${number}</text>
+                ` : ''}
             </svg>
         `;
         return this.svgToDataUrl(svg);
