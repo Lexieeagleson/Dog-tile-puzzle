@@ -75,11 +75,7 @@ class Board {
             }
             // Check for dogs that the block cannot rescue
             const dog = this.dogManager.getDogAt(x, y);
-            if (dog && !dog.canBeRescuedBy(block.color)) {
-                return false;
-            }
-            // Check if block has already rescued all required dogs
-            if (dog && block.isComplete()) {
+            if (dog && (!dog.canBeRescuedBy(block.color) || block.isComplete())) {
                 return false;
             }
         }
@@ -108,9 +104,7 @@ class Board {
             if (this.isOccupiedByBlock(x, y, block.id)) return false;
             // Check for dogs that the block cannot rescue
             const dog = this.dogManager.getDogAt(x, y);
-            if (dog && !dog.canBeRescuedBy(block.color)) return false;
-            // Check if block has already rescued all required dogs
-            if (dog && block.isComplete()) return false;
+            if (dog && (!dog.canBeRescuedBy(block.color) || block.isComplete())) return false;
         }
         
         return true;
