@@ -14,6 +14,22 @@ const ASSETS = {
         orange: { main: '#ff7043', dark: '#bf360c', light: '#ff8a65' }
     },
 
+    /**
+     * Safely encode SVG string to base64 data URL
+     * Handles potential encoding issues with special characters
+     */
+    svgToDataUrl: function(svg) {
+        try {
+            // Use encodeURIComponent for safer encoding, then convert to base64
+            const encoded = btoa(unescape(encodeURIComponent(svg)));
+            return 'data:image/svg+xml;base64,' + encoded;
+        } catch (e) {
+            // Fallback to URL-encoded data URI if base64 fails
+            console.warn('Base64 encoding failed, using URL encoding:', e);
+            return 'data:image/svg+xml,' + encodeURIComponent(svg);
+        }
+    },
+
     // Generate SVG block tile
     generateBlockTile: function(color, number) {
         const c = this.colors[color] || this.colors.red;
@@ -30,7 +46,7 @@ const ASSETS = {
                 ${number ? `<text x="25" y="33" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="white" text-anchor="middle" stroke="${c.dark}" stroke-width="1">${number}</text>` : ''}
             </svg>
         `;
-        return 'data:image/svg+xml;base64,' + btoa(svg);
+        return this.svgToDataUrl(svg);
     },
 
     // Generate cute dog sprite
@@ -67,7 +83,7 @@ const ASSETS = {
                 <path d="M 38 35 Q 48 30, 45 40" fill="none" stroke="${c.dark}" stroke-width="4" stroke-linecap="round"/>
             </svg>
         `;
-        return 'data:image/svg+xml;base64,' + btoa(svg);
+        return this.svgToDataUrl(svg);
     },
 
     // Generate wall tile
@@ -86,7 +102,7 @@ const ASSETS = {
                 <rect x="1" y="1" width="48" height="48" fill="none" stroke="#424242" stroke-width="2"/>
             </svg>
         `;
-        return 'data:image/svg+xml;base64,' + btoa(svg);
+        return this.svgToDataUrl(svg);
     },
 
     // Generate empty floor tile
@@ -97,7 +113,7 @@ const ASSETS = {
                 <rect x="0" y="0" width="50" height="50" fill="none" stroke="#e0e0e0" stroke-width="1"/>
             </svg>
         `;
-        return 'data:image/svg+xml;base64,' + btoa(svg);
+        return this.svgToDataUrl(svg);
     },
 
     // Generate victory celebration icon
@@ -113,7 +129,7 @@ const ASSETS = {
                 <circle cx="85" cy="75" r="3" fill="#ffeb3b"/>
             </svg>
         `;
-        return 'data:image/svg+xml;base64,' + btoa(svg);
+        return this.svgToDataUrl(svg);
     },
 
     // Cache for loaded images

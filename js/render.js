@@ -165,7 +165,8 @@ class Renderer {
                 this.ctx.font = 'bold 24px Arial';
                 this.ctx.textAlign = 'center';
                 this.ctx.textBaseline = 'middle';
-                this.ctx.fillText('🐕', px + this.tileSize / 2, py + this.tileSize / 2);
+                // Use 'D' as a reliable cross-platform fallback for dog
+                this.ctx.fillText('D', px + this.tileSize / 2, py + this.tileSize / 2);
             }
         }
     }
@@ -331,15 +332,17 @@ class Renderer {
                 this.ctx.arc(anim.x, anim.y, radius, 0, Math.PI * 2);
                 this.ctx.stroke();
                 
-                // Draw stars
+                // Draw stars using canvas drawing instead of Unicode characters
                 const starCount = 5;
                 for (let j = 0; j < starCount; j++) {
                     const angle = (j / starCount) * Math.PI * 2 + progress * Math.PI;
                     const starX = anim.x + Math.cos(angle) * radius;
                     const starY = anim.y + Math.sin(angle) * radius;
                     this.ctx.fillStyle = '#ffeb3b';
-                    this.ctx.font = '12px Arial';
-                    this.ctx.fillText('✦', starX - 4, starY + 4);
+                    // Draw a simple star shape
+                    this.ctx.beginPath();
+                    this.ctx.arc(starX, starY, 3, 0, Math.PI * 2);
+                    this.ctx.fill();
                 }
                 
                 this.ctx.globalAlpha = 1;

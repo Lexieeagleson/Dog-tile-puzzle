@@ -3,6 +3,16 @@
  * Handles game flow, input, and level management
  */
 
+// Game configuration constants
+const GAME_CONFIG = {
+    VIEWPORT_PADDING_X: 80,      // Horizontal padding for tile size calculation
+    VIEWPORT_PADDING_Y: 250,     // Vertical padding for tile size calculation
+    MAX_TILE_SIZE: 60,           // Maximum tile size in pixels
+    MIN_TILE_SIZE: 40,           // Minimum tile size in pixels
+    MAX_UNDO_STACK_SIZE: 50,     // Maximum number of undo states to store
+    VICTORY_DELAY_MS: 500        // Delay before showing victory screen
+};
+
 // Level definitions embedded in the code
 const LEVELS = [
     // Level 1 - Tutorial: Simple red dog rescue
@@ -606,11 +616,11 @@ class Game {
         
         // Adjust tile size based on board dimensions
         const maxSize = Math.min(
-            Math.floor((window.innerWidth - 80) / this.board.width),
-            Math.floor((window.innerHeight - 250) / this.board.height),
-            60
+            Math.floor((window.innerWidth - GAME_CONFIG.VIEWPORT_PADDING_X) / this.board.width),
+            Math.floor((window.innerHeight - GAME_CONFIG.VIEWPORT_PADDING_Y) / this.board.height),
+            GAME_CONFIG.MAX_TILE_SIZE
         );
-        this.renderer.setTileSize(Math.max(40, maxSize));
+        this.renderer.setTileSize(Math.max(GAME_CONFIG.MIN_TILE_SIZE, maxSize));
         
         // Clear undo stack
         this.undoStack = [];
@@ -662,7 +672,7 @@ class Game {
     saveState() {
         this.undoStack.push(this.board.serialize());
         // Limit undo stack size
-        if (this.undoStack.length > 50) {
+        if (this.undoStack.length > GAME_CONFIG.MAX_UNDO_STACK_SIZE) {
             this.undoStack.shift();
         }
     }
@@ -836,7 +846,7 @@ class Game {
             // Delay victory screen to let animations play
             setTimeout(() => {
                 this.showVictory();
-            }, 500);
+            }, GAME_CONFIG.VICTORY_DELAY_MS);
         }
     }
 
