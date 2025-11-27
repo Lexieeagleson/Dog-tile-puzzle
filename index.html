@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog Rescue Puzzle</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <header>
+            <h1>🐕 Dog Rescue Puzzle 🐕</h1>
+        </header>
+        
+        <!-- Level Select Screen -->
+        <div id="level-select" class="screen">
+            <h2>Select a Level</h2>
+            <div id="level-buttons"></div>
+        </div>
+        
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen hidden">
+            <div id="game-header">
+                <button id="back-btn" class="ui-btn" title="Back to Levels">
+                    <span>◀</span> Levels
+                </button>
+                <span id="level-title">Level 1</span>
+                <div id="ui-buttons">
+                    <button id="undo-btn" class="ui-btn" title="Undo">↩ Undo</button>
+                    <button id="reset-btn" class="ui-btn" title="Reset Level">🔄 Reset</button>
+                </div>
+            </div>
+            <div id="game-board-container">
+                <canvas id="game-board"></canvas>
+            </div>
+            <div id="status-bar">
+                <span id="dogs-remaining">Dogs remaining: 0</span>
+            </div>
+        </div>
+        
+        <!-- Victory Screen -->
+        <div id="victory-screen" class="screen hidden">
+            <div id="victory-content">
+                <h2>🎉 Level Complete! 🎉</h2>
+                <p>All dogs have been rescued!</p>
+                <div id="victory-buttons">
+                    <button id="next-level-btn" class="ui-btn">Next Level ▶</button>
+                    <button id="replay-btn" class="ui-btn">🔄 Replay</button>
+                    <button id="levels-btn" class="ui-btn">◀ Levels</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/assets.js"></script>
+    <script src="js/blocks.js"></script>
+    <script src="js/dogs.js"></script>
+    <script src="js/board.js"></script>
+    <script src="js/render.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>
