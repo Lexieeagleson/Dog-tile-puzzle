@@ -3,11 +3,61 @@
  * Manages the game board grid and collision detection
  */
 
+// Counter for generating unique obstacle IDs
+let obstacleIdCounter = 0;
+
+/**
+ * Obstacle class - Represents a movable obstacle (wall) on the board
+ */
+class Obstacle {
+    constructor(config) {
+        this.x = config.x;
+        this.y = config.y;
+        // Use a stable unique ID that doesn't change when position changes
+        this.id = config.id || `obstacle_${obstacleIdCounter++}`;
+    }
+
+    /**
+     * Check if this obstacle is at a specific position
+     */
+    isAt(x, y) {
+        return this.x === x && this.y === y;
+    }
+
+    /**
+     * Move obstacle to new position
+     */
+    moveTo(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    /**
+     * Serialize obstacle state for undo
+     */
+    serialize() {
+        return {
+            id: this.id,
+            x: this.x,
+            y: this.y
+        };
+    }
+
+    /**
+     * Restore obstacle state from serialized data
+     */
+    restore(data) {
+        this.x = data.x;
+        this.y = data.y;
+    }
+}
+
 class Board {
     constructor() {
         this.width = 0;
         this.height = 0;
         this.walls = [];
+        this.obstacles = [];
         this.blocks = [];
         this.dogManager = new DogManager();
     }
@@ -20,6 +70,9 @@ class Board {
         this.height = levelData.height;
         this.walls = levelData.walls ? [...levelData.walls] : [];
         
+        // Convert walls to movable obstacles
+        this.obstacles = this.walls.map(w => new Obstacle(w));
+        
         // Load blocks
         this.blocks = levelData.blocks.map(b => new Block(b));
         
@@ -28,10 +81,51 @@ class Board {
     }
 
     /**
-     * Check if a position is a wall
+     * Check if a position is a wall (now checks obstacles)
      */
     isWall(x, y) {
-        return this.walls.some(w => w.x === x && w.y === y);
+        return this.obstacles.some(o => o.isAt(x, y));
+    }
+
+    /**
+     * Get obstacle at a specific position
+     */
+    getObstacleAt(x, y) {
+        return this.obstacles.find(o => o.isAt(x, y));
+    }
+
+    /**
+     * Check if an obstacle can move to a new position
+     */
+    canObstacleMoveTo(obstacle, newX, newY) {
+        // Check bounds
+        if (!this.isInBounds(newX, newY)) {
+            return false;
+        }
+        // Check other obstacles
+        if (this.obstacles.some(o => o !== obstacle && o.isAt(newX, newY))) {
+            return false;
+        }
+        // Check blocks
+        if (this.isOccupiedByBlock(newX, newY)) {
+            return false;
+        }
+        // Check dogs
+        if (this.dogManager.getDogAt(newX, newY)) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Move an obstacle to a new position
+     */
+    moveObstacle(obstacle, newX, newY) {
+        if (!this.canObstacleMoveTo(obstacle, newX, newY)) {
+            return { success: false };
+        }
+        obstacle.moveTo(newX, newY);
+        return { success: true };
     }
 
     /**
@@ -211,7 +305,8 @@ class Board {
     serialize() {
         return {
             blocks: this.blocks.map(b => b.serialize()),
-            dogs: this.dogManager.serialize()
+            dogs: this.dogManager.serialize(),
+            obstacles: this.obstacles.map(o => o.serialize())
         };
     }
 
@@ -225,6 +320,13 @@ class Board {
             }
         });
         this.dogManager.restore(data.dogs);
+        if (data.obstacles) {
+            data.obstacles.forEach((obstacleData, i) => {
+                if (this.obstacles[i]) {
+                    this.obstacles[i].restore(obstacleData);
+                }
+            });
+        }
     }
 
     /**
