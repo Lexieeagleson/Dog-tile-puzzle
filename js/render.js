@@ -162,6 +162,7 @@ class Renderer {
 
     /**
      * Draw wall tiles (obstacles)
+     * Now handles multi-cell obstacles - draws all tiles of each obstacle
      */
     drawWalls(dragX, dragY) {
         const wallImg = ASSETS.getImage('wall');
@@ -172,36 +173,50 @@ class Renderer {
             
             // Check for smooth movement animation
             const anim = this.animatingObstacles.get(obstacle.id);
-            let px, py;
+            let baseX, baseY;
             
             if (anim) {
                 const easedProgress = this.easeOutCubic(anim.progress);
-                px = (anim.fromX + (anim.toX - anim.fromX) * easedProgress) * this.tileSize;
-                py = (anim.fromY + (anim.toY - anim.fromY) * easedProgress) * this.tileSize;
+                baseX = anim.fromX + (anim.toX - anim.fromX) * easedProgress;
+                baseY = anim.fromY + (anim.toY - anim.fromY) * easedProgress;
             } else {
-                px = obstacle.x * this.tileSize;
-                py = obstacle.y * this.tileSize;
+                baseX = obstacle.x;
+                baseY = obstacle.y;
             }
             
-            this.drawObstacleTile(px, py, wallImg);
+            // Draw all tiles of the obstacle
+            for (const [dx, dy] of obstacle.coords) {
+                const px = (baseX + dx) * this.tileSize;
+                const py = (baseY + dy) * this.tileSize;
+                this.drawObstacleTile(px, py, wallImg);
+            }
         }
         
         // Draw selected obstacle on top (possibly at drag position)
         if (this.selectedObstacle) {
+            let baseX, baseY;
             if (dragX !== null && dragY !== null) {
                 const gridPos = this.pixelToGrid(
                     dragX - this.dragOffset.x,
                     dragY - this.dragOffset.y
                 );
-                const px = gridPos.x * this.tileSize;
-                const py = gridPos.y * this.tileSize;
+                baseX = gridPos.x;
+                baseY = gridPos.y;
                 this.ctx.globalAlpha = 0.8;
-                this.drawObstacleTile(px, py, wallImg, true);
-                this.ctx.globalAlpha = 1;
             } else {
-                const px = this.selectedObstacle.x * this.tileSize;
-                const py = this.selectedObstacle.y * this.tileSize;
+                baseX = this.selectedObstacle.x;
+                baseY = this.selectedObstacle.y;
+            }
+            
+            // Draw all tiles of the selected obstacle
+            for (const [dx, dy] of this.selectedObstacle.coords) {
+                const px = (baseX + dx) * this.tileSize;
+                const py = (baseY + dy) * this.tileSize;
                 this.drawObstacleTile(px, py, wallImg, true);
+            }
+            
+            if (dragX !== null && dragY !== null) {
+                this.ctx.globalAlpha = 1;
             }
         }
     }
@@ -363,6 +378,7 @@ class Renderer {
 
     /**
      * Draw drop preview (valid/invalid position indicator)
+     * Now handles multi-cell obstacles
      */
     drawDropPreview(dragX, dragY, entityType = 'block') {
         const gridPos = this.pixelToGrid(
@@ -386,9 +402,12 @@ class Renderer {
             this.ctx.globalAlpha = 0.3;
             this.ctx.fillStyle = canMove ? '#4CAF50' : '#f44336';
             
-            const px = gridPos.x * this.tileSize;
-            const py = gridPos.y * this.tileSize;
-            this.ctx.fillRect(px, py, this.tileSize, this.tileSize);
+            // Draw preview for all tiles of the obstacle
+            for (const [dx, dy] of this.selectedObstacle.coords) {
+                const px = (gridPos.x + dx) * this.tileSize;
+                const py = (gridPos.y + dy) * this.tileSize;
+                this.ctx.fillRect(px, py, this.tileSize, this.tileSize);
+            }
         }
         
         this.ctx.globalAlpha = 1;

@@ -8,20 +8,48 @@ let obstacleIdCounter = 0;
 
 /**
  * Obstacle class - Represents a movable obstacle (wall) on the board
+ * Obstacles consist of multiple connected cells that move together as one piece.
+ * Minimum size is 2 cells.
  */
 class Obstacle {
     constructor(config) {
+        // Base position (anchor point)
         this.x = config.x;
         this.y = config.y;
         // Use a stable unique ID that doesn't change when position changes
         this.id = config.id || `obstacle_${obstacleIdCounter++}`;
+        
+        // Coordinates relative to the anchor point (like Block class)
+        // If coords is provided, use it; otherwise default to a single cell at [0,0]
+        // For multi-cell obstacles, coords should be like [[0,0], [1,0]] for a horizontal 2-cell obstacle
+        if (config.coords) {
+            this.coords = config.coords;
+        } else {
+            // Legacy single-cell support: default to single cell
+            this.coords = [[0, 0]];
+        }
     }
 
     /**
-     * Check if this obstacle is at a specific position
+     * Get absolute positions of all tiles in this obstacle
+     */
+    getAbsoluteCoords() {
+        return this.coords.map(([dx, dy]) => [this.x + dx, this.y + dy]);
+    }
+
+    /**
+     * Check if this obstacle occupies a specific position
+     */
+    occupiesTile(x, y) {
+        return this.getAbsoluteCoords().some(([ox, oy]) => ox === x && oy === y);
+    }
+
+    /**
+     * Check if this obstacle is at a specific position (legacy compatibility)
+     * Now checks if any cell of the obstacle is at the position
      */
     isAt(x, y) {
-        return this.x === x && this.y === y;
+        return this.occupiesTile(x, y);
     }
 
     /**
@@ -33,13 +61,29 @@ class Obstacle {
     }
 
     /**
+     * Get bounding box of the obstacle
+     */
+    getBoundingBox() {
+        const absCoords = this.getAbsoluteCoords();
+        const xs = absCoords.map(c => c[0]);
+        const ys = absCoords.map(c => c[1]);
+        return {
+            minX: Math.min(...xs),
+            maxX: Math.max(...xs),
+            minY: Math.min(...ys),
+            maxY: Math.max(...ys)
+        };
+    }
+
+    /**
      * Serialize obstacle state for undo
      */
     serialize() {
         return {
             id: this.id,
             x: this.x,
-            y: this.y
+            y: this.y,
+            coords: [...this.coords]
         };
     }
 
@@ -49,6 +93,9 @@ class Obstacle {
     restore(data) {
         this.x = data.x;
         this.y = data.y;
+        if (data.coords) {
+            this.coords = [...data.coords];
+        }
     }
 }
 
@@ -70,8 +117,15 @@ class Board {
         this.height = levelData.height;
         this.walls = levelData.walls ? [...levelData.walls] : [];
         
-        // Convert walls to movable obstacles
-        this.obstacles = this.walls.map(w => new Obstacle(w));
+        // Check if level uses new obstacle format (with coords and explicit grouping)
+        if (levelData.obstacles && Array.isArray(levelData.obstacles)) {
+            // New format: obstacles are already grouped
+            this.obstacles = levelData.obstacles.map(o => new Obstacle(o));
+        } else {
+            // Legacy format: convert individual wall cells into grouped obstacles
+            // Group adjacent wall cells into multi-cell obstacles
+            this.obstacles = this.groupWallsIntoObstacles(this.walls);
+        }
         
         // Load blocks
         this.blocks = levelData.blocks.map(b => new Block(b));
@@ -81,38 +135,110 @@ class Board {
     }
 
     /**
+     * Group individual wall cells into connected multi-cell obstacles
+     * Uses flood-fill to find connected components (4-directional adjacency)
+     */
+    groupWallsIntoObstacles(walls) {
+        if (!walls || walls.length === 0) return [];
+        
+        // Create a set of wall positions for quick lookup
+        const wallSet = new Set(walls.map(w => `${w.x},${w.y}`));
+        const visited = new Set();
+        const obstacles = [];
+        
+        for (const wall of walls) {
+            const key = `${wall.x},${wall.y}`;
+            if (visited.has(key)) continue;
+            
+            // Flood fill to find all connected cells
+            const group = [];
+            const queue = [{ x: wall.x, y: wall.y }];
+            
+            while (queue.length > 0) {
+                const cell = queue.shift();
+                const cellKey = `${cell.x},${cell.y}`;
+                
+                if (visited.has(cellKey)) continue;
+                if (!wallSet.has(cellKey)) continue;
+                
+                visited.add(cellKey);
+                group.push(cell);
+                
+                // Check 4-directional neighbors
+                const neighbors = [
+                    { x: cell.x + 1, y: cell.y },
+                    { x: cell.x - 1, y: cell.y },
+                    { x: cell.x, y: cell.y + 1 },
+                    { x: cell.x, y: cell.y - 1 }
+                ];
+                
+                for (const neighbor of neighbors) {
+                    const neighborKey = `${neighbor.x},${neighbor.y}`;
+                    if (!visited.has(neighborKey) && wallSet.has(neighborKey)) {
+                        queue.push(neighbor);
+                    }
+                }
+            }
+            
+            if (group.length > 0) {
+                // Use the first cell as the anchor point
+                const anchor = group[0];
+                // Calculate relative coordinates for all cells
+                const coords = group.map(cell => [cell.x - anchor.x, cell.y - anchor.y]);
+                
+                obstacles.push(new Obstacle({
+                    x: anchor.x,
+                    y: anchor.y,
+                    coords: coords
+                }));
+            }
+        }
+        
+        return obstacles;
+    }
+
+    /**
      * Check if a position is a wall (now checks obstacles)
      */
     isWall(x, y) {
-        return this.obstacles.some(o => o.isAt(x, y));
+        return this.obstacles.some(o => o.occupiesTile(x, y));
     }
 
     /**
      * Get obstacle at a specific position
      */
     getObstacleAt(x, y) {
-        return this.obstacles.find(o => o.isAt(x, y));
+        return this.obstacles.find(o => o.occupiesTile(x, y));
     }
 
     /**
      * Check if an obstacle can move to a new position
+     * Now handles multi-cell obstacles - all tiles must be in valid positions
      */
     canObstacleMoveTo(obstacle, newX, newY) {
-        // Check bounds
-        if (!this.isInBounds(newX, newY)) {
-            return false;
-        }
-        // Check other obstacles
-        if (this.obstacles.some(o => o !== obstacle && o.isAt(newX, newY))) {
-            return false;
-        }
-        // Check blocks
-        if (this.isOccupiedByBlock(newX, newY)) {
-            return false;
-        }
-        // Check dogs
-        if (this.dogManager.getDogAt(newX, newY)) {
-            return false;
+        // Calculate new absolute positions for all tiles of the obstacle
+        const newCoords = obstacle.coords.map(([dx, dy]) => [newX + dx, newY + dy]);
+        
+        // Check each tile
+        for (const [x, y] of newCoords) {
+            // Check bounds
+            if (!this.isInBounds(x, y)) {
+                return false;
+            }
+            // Check other obstacles (excluding this obstacle)
+            for (const other of this.obstacles) {
+                if (other !== obstacle && other.occupiesTile(x, y)) {
+                    return false;
+                }
+            }
+            // Check blocks
+            if (this.isOccupiedByBlock(x, y)) {
+                return false;
+            }
+            // Check dogs
+            if (this.dogManager.getDogAt(x, y)) {
+                return false;
+            }
         }
         return true;
     }
