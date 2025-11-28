@@ -1,10 +1,55 @@
 /**
  * Dog Rescue Puzzle - Block Management
- * Handles polyomino block shapes (I, L, J, T) and their behaviors
+ * Handles polyomino block shapes (2-6 squares) and their behaviors
  */
 
-// Define the standard polyomino shapes (no Z, S, or O)
+/**
+ * Utility function to rotate coordinates 90 degrees clockwise and normalize
+ * @param {Array} coords - Array of [x, y] coordinate pairs
+ * @returns {Array} Rotated and normalized coordinates
+ */
+function rotateCoords90CW(coords) {
+    // Rotate 90 degrees clockwise: (x, y) -> (y, -x)
+    const rotated = coords.map(([x, y]) => [y, -x]);
+    
+    // Normalize to start from (0, 0) - find min x and y
+    const minX = Math.min(...rotated.map(([x, y]) => x));
+    const minY = Math.min(...rotated.map(([x, y]) => y));
+    
+    // Shift all coords so minimum is at origin
+    return rotated.map(([x, y]) => [x - minX, y - minY]);
+}
+
+// Define the standard polyomino shapes (2-6 squares)
 const BLOCK_SHAPES = {
+    // 2-square shapes (dominoes)
+    I2: {
+        coords: [[0, 0], [1, 0]],
+        rotations: [
+            [[0, 0], [1, 0]],  // Horizontal
+            [[0, 0], [0, 1]]   // Vertical
+        ]
+    },
+
+    // 3-square shapes (triominoes)
+    I3: {
+        coords: [[0, 0], [1, 0], [2, 0]],
+        rotations: [
+            [[0, 0], [1, 0], [2, 0]],  // Horizontal
+            [[0, 0], [0, 1], [0, 2]]   // Vertical
+        ]
+    },
+    L3: {
+        coords: [[0, 0], [0, 1], [1, 1]],
+        rotations: [
+            [[0, 0], [0, 1], [1, 1]],  // Default
+            [[0, 0], [1, 0], [0, 1]],  // 90 CW
+            [[0, 0], [1, 0], [1, 1]],  // 180
+            [[1, 0], [0, 1], [1, 1]]   // 270
+        ]
+    },
+
+    // 4-square shapes (tetrominoes)
     I: {
         coords: [[0, 0], [1, 0], [2, 0], [3, 0]],
         rotations: [
@@ -37,6 +82,84 @@ const BLOCK_SHAPES = {
             [[0, 0], [0, 1], [0, 2], [1, 1]],  // 90 CW (T pointing right)
             [[1, 0], [0, 1], [1, 1], [2, 1]],  // 180 (T pointing up)
             [[1, 0], [1, 1], [1, 2], [0, 1]]   // 270 (T pointing left)
+        ]
+    },
+    O: {
+        coords: [[0, 0], [1, 0], [0, 1], [1, 1]],
+        rotations: [
+            [[0, 0], [1, 0], [0, 1], [1, 1]]   // Square (no rotation needed)
+        ]
+    },
+
+    // 5-square shapes (pentominoes)
+    I5: {
+        coords: [[0, 0], [1, 0], [2, 0], [3, 0], [4, 0]],
+        rotations: [
+            [[0, 0], [1, 0], [2, 0], [3, 0], [4, 0]],  // Horizontal
+            [[0, 0], [0, 1], [0, 2], [0, 3], [0, 4]]   // Vertical
+        ]
+    },
+    L5: {
+        coords: [[0, 0], [0, 1], [0, 2], [0, 3], [1, 3]],
+        rotations: [
+            [[0, 0], [0, 1], [0, 2], [0, 3], [1, 3]],  // Default
+            [[0, 0], [1, 0], [2, 0], [3, 0], [0, 1]],  // 90 CW
+            [[0, 0], [1, 0], [1, 1], [1, 2], [1, 3]],  // 180
+            [[3, 0], [0, 1], [1, 1], [2, 1], [3, 1]]   // 270
+        ]
+    },
+    T5: {
+        coords: [[0, 0], [1, 0], [2, 0], [1, 1], [1, 2]],
+        rotations: [
+            [[0, 0], [1, 0], [2, 0], [1, 1], [1, 2]],  // Default (T pointing down)
+            [[0, 0], [0, 1], [0, 2], [1, 1], [2, 1]],  // 90 CW
+            [[1, 0], [1, 1], [0, 2], [1, 2], [2, 2]],  // 180
+            [[0, 1], [1, 1], [2, 0], [2, 1], [2, 2]]   // 270
+        ]
+    },
+    P: {
+        coords: [[0, 0], [1, 0], [0, 1], [1, 1], [0, 2]],
+        rotations: [
+            [[0, 0], [1, 0], [0, 1], [1, 1], [0, 2]],  // Default
+            [[0, 0], [1, 0], [2, 0], [1, 1], [2, 1]],  // 90 CW
+            [[1, 0], [0, 1], [1, 1], [0, 2], [1, 2]],  // 180
+            [[0, 0], [1, 0], [0, 1], [1, 1], [2, 1]]   // 270
+        ]
+    },
+    U: {
+        coords: [[0, 0], [2, 0], [0, 1], [1, 1], [2, 1]],
+        rotations: [
+            [[0, 0], [2, 0], [0, 1], [1, 1], [2, 1]],  // Default
+            [[0, 0], [1, 0], [0, 1], [0, 2], [1, 2]],  // 90 CW
+            [[0, 0], [1, 0], [2, 0], [0, 1], [2, 1]],  // 180
+            [[0, 0], [1, 0], [1, 1], [0, 2], [1, 2]]   // 270
+        ]
+    },
+
+    // 6-square shapes (hexominoes)
+    I6: {
+        coords: [[0, 0], [1, 0], [2, 0], [3, 0], [4, 0], [5, 0]],
+        rotations: [
+            [[0, 0], [1, 0], [2, 0], [3, 0], [4, 0], [5, 0]],  // Horizontal
+            [[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5]]   // Vertical
+        ]
+    },
+    L6: {
+        coords: [[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [1, 4]],
+        rotations: [
+            [[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [1, 4]],  // Default
+            [[0, 0], [1, 0], [2, 0], [3, 0], [4, 0], [0, 1]],  // 90 CW
+            [[0, 0], [1, 0], [1, 1], [1, 2], [1, 3], [1, 4]],  // 180
+            [[4, 0], [0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]   // 270
+        ]
+    },
+    C: {
+        coords: [[0, 0], [1, 0], [2, 0], [0, 1], [0, 2], [1, 2]],
+        rotations: [
+            [[0, 0], [1, 0], [2, 0], [0, 1], [0, 2], [1, 2]],  // Default
+            [[0, 0], [1, 0], [0, 1], [0, 2], [1, 2], [2, 2]],  // 90 CW
+            [[1, 0], [2, 0], [2, 1], [0, 2], [1, 2], [2, 2]],  // 180
+            [[0, 0], [1, 0], [2, 0], [2, 1], [1, 2], [2, 2]]   // 270
         ]
     }
 };
@@ -86,9 +209,17 @@ class Block {
     rotate() {
         if (!this.rotatable) return false;
         
-        const rotations = BLOCK_SHAPES[this.shape].rotations;
-        this.rotationIndex = (this.rotationIndex + 1) % rotations.length;
-        this.coords = [...rotations[this.rotationIndex]];
+        // Check if shape has predefined rotations
+        const shapeData = BLOCK_SHAPES[this.shape];
+        if (shapeData && shapeData.rotations) {
+            const rotations = shapeData.rotations;
+            this.rotationIndex = (this.rotationIndex + 1) % rotations.length;
+            this.coords = [...rotations[this.rotationIndex]];
+        } else {
+            // For custom shapes without predefined rotations, calculate 90-degree CW rotation
+            this.coords = rotateCoords90CW(this.coords);
+            this.rotationIndex = (this.rotationIndex + 1) % 4;
+        }
         return true;
     }
 

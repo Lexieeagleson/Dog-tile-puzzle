@@ -179,9 +179,9 @@ const ASSETS = {
     preloadAssets: async function() {
         const promises = [];
         
-        // Load block tiles for each color and number
+        // Load block tiles for each color and number (1-6 for blocks with 2-6 squares)
         for (const color of Object.keys(this.colors)) {
-            for (let num = 1; num <= 4; num++) {
+            for (let num = 1; num <= 6; num++) {
                 const key = `block_${color}_${num}`;
                 promises.push(this.loadImage(key, this.generateBlockTile(color, num)));
             }
