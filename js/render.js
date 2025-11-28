@@ -318,58 +318,203 @@ class Renderer {
     }
 
     /**
-     * Draw a single block (gridX and gridY can be fractional for smooth animation)
+     * Draw a single block as a unified smooth shape (gridX and gridY can be fractional for smooth animation)
      */
     drawBlock(block, gridX, gridY, alpha = 1, selected = false) {
         const remaining = block.getRemainingDogs();
-        const blockImg = ASSETS.getImage(`block_${block.color}_${remaining}`);
+        const colors = ASSETS.colors[block.color] || { main: '#888', dark: '#555', light: '#aaa' };
         
         this.ctx.globalAlpha = alpha;
         
+        // Create a set of coordinates for quick lookup
+        const coordSet = new Set(block.coords.map(([dx, dy]) => `${dx},${dy}`));
+        
+        // Calculate the bounding box center for the number display
+        const xs = block.coords.map(([dx]) => dx);
+        const ys = block.coords.map(([, dy]) => dy);
+        const centerX = (Math.min(...xs) + Math.max(...xs) + 1) / 2;
+        const centerY = (Math.min(...ys) + Math.max(...ys) + 1) / 2;
+        
+        // Padding from tile edges for the block shape
+        const padding = 3;
+        
+        // Calculate bounds for gradient
+        const minPy = (gridY + Math.min(...ys)) * this.tileSize;
+        const maxPy = (gridY + Math.max(...ys) + 1) * this.tileSize;
+        
+        // Create gradient for the unified block
+        const gradient = this.ctx.createLinearGradient(0, minPy, 0, maxPy);
+        gradient.addColorStop(0, colors.light);
+        gradient.addColorStop(0.5, colors.main);
+        gradient.addColorStop(1, colors.dark);
+        
+        // Draw shadow layer first (offset filled rectangles)
+        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
         for (const [dx, dy] of block.coords) {
-            const px = (gridX + dx) * this.tileSize;
-            const py = (gridY + dy) * this.tileSize;
-            
-            if (blockImg) {
-                this.ctx.drawImage(blockImg, px, py, this.tileSize, this.tileSize);
-            } else {
-                // Fallback
-                const colors = ASSETS.colors[block.color] || { main: '#888', dark: '#555' };
-                this.ctx.fillStyle = colors.main;
-                this.ctx.fillRect(px + 2, py + 2, this.tileSize - 4, this.tileSize - 4);
-                this.ctx.strokeStyle = colors.dark;
-                this.ctx.lineWidth = 2;
-                this.ctx.strokeRect(px + 2, py + 2, this.tileSize - 4, this.tileSize - 4);
-            }
+            const px = (gridX + dx) * this.tileSize + padding + 1;
+            const py = (gridY + dy) * this.tileSize + padding + 2;
+            this.ctx.fillRect(px, py, this.tileSize - padding * 2, this.tileSize - padding * 2);
         }
         
-        // Draw number indicator on first tile of block
-        if (block.coords.length > 0) {
-            const [dx, dy] = block.coords[0];
-            const px = (gridX + dx) * this.tileSize;
-            const py = (gridY + dy) * this.tileSize;
-            
-            // The number is already in the image, but let's add a backup
-            if (!blockImg) {
-                this.ctx.fillStyle = 'white';
-                this.ctx.font = 'bold 22px Arial';
-                this.ctx.textAlign = 'center';
-                this.ctx.textBaseline = 'middle';
-                this.ctx.strokeStyle = '#333';
-                this.ctx.lineWidth = 3;
-                this.ctx.strokeText(remaining.toString(), px + this.tileSize / 2, py + this.tileSize / 2);
-                this.ctx.fillText(remaining.toString(), px + this.tileSize / 2, py + this.tileSize / 2);
-            }
+        // Draw filled tiles (unified color with gradient)
+        this.ctx.fillStyle = gradient;
+        for (const [dx, dy] of block.coords) {
+            const px = (gridX + dx) * this.tileSize + padding;
+            const py = (gridY + dy) * this.tileSize + padding;
+            this.ctx.fillRect(px, py, this.tileSize - padding * 2, this.tileSize - padding * 2);
         }
         
-        // Draw selection highlight
+        // Draw glossy highlight on top portion of each tile
+        const glossGradient = this.ctx.createLinearGradient(0, minPy, 0, minPy + (maxPy - minPy) * 0.5);
+        glossGradient.addColorStop(0, 'rgba(255, 255, 255, 0.35)');
+        glossGradient.addColorStop(0.5, 'rgba(255, 255, 255, 0.1)');
+        glossGradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        
+        this.ctx.fillStyle = glossGradient;
+        for (const [dx, dy] of block.coords) {
+            const px = (gridX + dx) * this.tileSize + padding;
+            const py = (gridY + dy) * this.tileSize + padding;
+            this.ctx.fillRect(px, py, this.tileSize - padding * 2, (this.tileSize - padding * 2) * 0.5);
+        }
+        
+        // Draw only the outer border edges (not between adjacent tiles)
+        this.ctx.strokeStyle = colors.dark;
+        this.ctx.lineWidth = 2;
+        this.ctx.lineCap = 'round';
+        this.ctx.lineJoin = 'round';
+        
+        for (const [dx, dy] of block.coords) {
+            const px = (gridX + dx) * this.tileSize + padding;
+            const py = (gridY + dy) * this.tileSize + padding;
+            const size = this.tileSize - padding * 2;
+            
+            // Check which neighbors exist
+            const hasTop = coordSet.has(`${dx},${dy - 1}`);
+            const hasBottom = coordSet.has(`${dx},${dy + 1}`);
+            const hasLeft = coordSet.has(`${dx - 1},${dy}`);
+            const hasRight = coordSet.has(`${dx + 1},${dy}`);
+            
+            // Draw only edges that are on the boundary
+            this.ctx.beginPath();
+            if (!hasTop) {
+                this.ctx.moveTo(px, py);
+                this.ctx.lineTo(px + size, py);
+            }
+            this.ctx.stroke();
+            
+            this.ctx.beginPath();
+            if (!hasRight) {
+                this.ctx.moveTo(px + size, py);
+                this.ctx.lineTo(px + size, py + size);
+            }
+            this.ctx.stroke();
+            
+            this.ctx.beginPath();
+            if (!hasBottom) {
+                this.ctx.moveTo(px + size, py + size);
+                this.ctx.lineTo(px, py + size);
+            }
+            this.ctx.stroke();
+            
+            this.ctx.beginPath();
+            if (!hasLeft) {
+                this.ctx.moveTo(px, py + size);
+                this.ctx.lineTo(px, py);
+            }
+            this.ctx.stroke();
+        }
+        
+        // Draw inner highlight on outer edges only
+        this.ctx.strokeStyle = colors.light;
+        this.ctx.lineWidth = 1;
+        this.ctx.globalAlpha = alpha * 0.5;
+        
+        for (const [dx, dy] of block.coords) {
+            const px = (gridX + dx) * this.tileSize + padding + 2;
+            const py = (gridY + dy) * this.tileSize + padding + 2;
+            const size = this.tileSize - padding * 2 - 4;
+            
+            const hasTop = coordSet.has(`${dx},${dy - 1}`);
+            const hasLeft = coordSet.has(`${dx - 1},${dy}`);
+            
+            // Draw highlight on top and left edges only (light source from top-left)
+            this.ctx.beginPath();
+            if (!hasTop) {
+                this.ctx.moveTo(px, py);
+                this.ctx.lineTo(px + size, py);
+            }
+            this.ctx.stroke();
+            
+            this.ctx.beginPath();
+            if (!hasLeft) {
+                this.ctx.moveTo(px, py);
+                this.ctx.lineTo(px, py + size);
+            }
+            this.ctx.stroke();
+        }
+        
+        this.ctx.globalAlpha = alpha;
+        
+        // Draw number indicator in the center of the block
+        const numberX = (gridX + centerX) * this.tileSize;
+        const numberY = (gridY + centerY) * this.tileSize;
+        
+        // Draw number background circle
+        this.ctx.beginPath();
+        this.ctx.arc(numberX, numberY, 12, 0, Math.PI * 2);
+        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.25)';
+        this.ctx.fill();
+        
+        // Draw number text
+        this.ctx.fillStyle = 'white';
+        this.ctx.font = 'bold 18px Arial';
+        this.ctx.textAlign = 'center';
+        this.ctx.textBaseline = 'middle';
+        this.ctx.fillText(remaining.toString(), numberX, numberY + 1);
+        
+        // Draw selection highlight on outer edges only
         if (selected) {
             this.ctx.strokeStyle = '#ffeb3b';
             this.ctx.lineWidth = 3;
+            this.ctx.globalAlpha = alpha;
+            
             for (const [dx, dy] of block.coords) {
-                const px = (gridX + dx) * this.tileSize;
-                const py = (gridY + dy) * this.tileSize;
-                this.ctx.strokeRect(px + 1, py + 1, this.tileSize - 2, this.tileSize - 2);
+                const px = (gridX + dx) * this.tileSize + padding - 1;
+                const py = (gridY + dy) * this.tileSize + padding - 1;
+                const size = this.tileSize - padding * 2 + 2;
+                
+                const hasTop = coordSet.has(`${dx},${dy - 1}`);
+                const hasBottom = coordSet.has(`${dx},${dy + 1}`);
+                const hasLeft = coordSet.has(`${dx - 1},${dy}`);
+                const hasRight = coordSet.has(`${dx + 1},${dy}`);
+                
+                this.ctx.beginPath();
+                if (!hasTop) {
+                    this.ctx.moveTo(px, py);
+                    this.ctx.lineTo(px + size, py);
+                }
+                this.ctx.stroke();
+                
+                this.ctx.beginPath();
+                if (!hasRight) {
+                    this.ctx.moveTo(px + size, py);
+                    this.ctx.lineTo(px + size, py + size);
+                }
+                this.ctx.stroke();
+                
+                this.ctx.beginPath();
+                if (!hasBottom) {
+                    this.ctx.moveTo(px + size, py + size);
+                    this.ctx.lineTo(px, py + size);
+                }
+                this.ctx.stroke();
+                
+                this.ctx.beginPath();
+                if (!hasLeft) {
+                    this.ctx.moveTo(px, py + size);
+                    this.ctx.lineTo(px, py);
+                }
+                this.ctx.stroke();
             }
         }
         
