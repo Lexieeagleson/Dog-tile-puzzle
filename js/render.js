@@ -449,13 +449,13 @@ class Renderer {
         
         // Draw number background circle
         this.ctx.beginPath();
-        this.ctx.arc(numberX, numberY, 12, 0, Math.PI * 2);
+        this.ctx.arc(numberX, numberY, 16, 0, Math.PI * 2);
         this.ctx.fillStyle = 'rgba(0, 0, 0, 0.25)';
         this.ctx.fill();
         
         // Draw number text
         this.ctx.fillStyle = 'white';
-        this.ctx.font = 'bold 18px Arial';
+        this.ctx.font = 'bold 24px Arial';
         this.ctx.textAlign = 'center';
         this.ctx.textBaseline = 'middle';
         this.ctx.fillText(remaining.toString(), numberX, numberY + 1);
