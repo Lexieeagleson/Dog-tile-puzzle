@@ -20,12 +20,16 @@ class Obstacle {
         this.id = config.id || `obstacle_${obstacleIdCounter++}`;
         
         // Coordinates relative to the anchor point (like Block class)
-        // If coords is provided, use it; otherwise default to a single cell at [0,0]
         // For multi-cell obstacles, coords should be like [[0,0], [1,0]] for a horizontal 2-cell obstacle
+        // Minimum size requirement: obstacles must be at least 2 cells
         if (config.coords) {
             this.coords = config.coords;
+            if (this.coords.length < 2) {
+                console.warn(`Obstacle ${this.id} has less than 2 cells. Obstacles should be at least 2 cells minimum.`);
+            }
         } else {
-            // Legacy single-cell support: default to single cell
+            // Legacy single-cell - this shouldn't happen with properly grouped obstacles
+            console.warn(`Obstacle at (${this.x}, ${this.y}) was created without coords. Obstacles should be at least 2 cells minimum.`);
             this.coords = [[0, 0]];
         }
     }
@@ -181,8 +185,15 @@ class Board {
             }
             
             if (group.length > 0) {
-                // Use the first cell as the anchor point
-                const anchor = group[0];
+                // Use deterministic anchor point: top-left cell (minimum y, then minimum x)
+                // This ensures consistent obstacle positioning across different runs
+                const anchor = group.reduce((best, cell) => {
+                    if (cell.y < best.y || (cell.y === best.y && cell.x < best.x)) {
+                        return cell;
+                    }
+                    return best;
+                }, group[0]);
+                
                 // Calculate relative coordinates for all cells
                 const coords = group.map(cell => [cell.x - anchor.x, cell.y - anchor.y]);
                 
