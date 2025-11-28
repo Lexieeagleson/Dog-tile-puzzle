@@ -742,34 +742,34 @@ class Game {
         if (this.dragType === 'block' && this.renderer.getSelectedBlock()) {
             const block = this.renderer.getSelectedBlock();
             
-            // Calculate target grid position
+            // Calculate target grid position for validation
             const targetGridPos = this.renderer.pixelToGrid(
                 coords.x - this.renderer.dragOffset.x,
                 coords.y - this.renderer.dragOffset.y
             );
             
-            // Update the last valid position by following a valid path
+            // Update the last valid position by following a valid path (for drop)
             this.updateValidDragPosition(block, targetGridPos.x, targetGridPos.y, 'block');
             
-            // Update dragX/dragY to render at the constrained position
-            this.dragX = this.lastValidGridX * this.renderer.tileSize + this.renderer.dragOffset.x;
-            this.dragY = this.lastValidGridY * this.renderer.tileSize + this.renderer.dragOffset.y;
+            // Smooth dragging: follow the cursor directly (not snapped to grid)
+            this.dragX = coords.x;
+            this.dragY = coords.y;
             
         } else if (this.dragType === 'obstacle' && this.renderer.getSelectedObstacle()) {
             const obstacle = this.renderer.getSelectedObstacle();
             
-            // Calculate target grid position
+            // Calculate target grid position for validation
             const targetGridPos = this.renderer.pixelToGrid(
                 coords.x - this.renderer.dragOffset.x,
                 coords.y - this.renderer.dragOffset.y
             );
             
-            // Update the last valid position by following a valid path
+            // Update the last valid position by following a valid path (for drop)
             this.updateValidDragPosition(obstacle, targetGridPos.x, targetGridPos.y, 'obstacle');
             
-            // Update dragX/dragY to render at the constrained position
-            this.dragX = this.lastValidGridX * this.renderer.tileSize + this.renderer.dragOffset.x;
-            this.dragY = this.lastValidGridY * this.renderer.tileSize + this.renderer.dragOffset.y;
+            // Smooth dragging: follow the cursor directly (not snapped to grid)
+            this.dragX = coords.x;
+            this.dragY = coords.y;
         }
     }
 
@@ -888,34 +888,34 @@ class Game {
         if (this.dragType === 'block' && this.renderer.getSelectedBlock()) {
             const block = this.renderer.getSelectedBlock();
             
-            // Calculate target grid position
+            // Calculate target grid position for validation
             const targetGridPos = this.renderer.pixelToGrid(
                 coords.x - this.renderer.dragOffset.x,
                 coords.y - this.renderer.dragOffset.y
             );
             
-            // Update the last valid position by following a valid path
+            // Update the last valid position by following a valid path (for drop)
             this.updateValidDragPosition(block, targetGridPos.x, targetGridPos.y, 'block');
             
-            // Update dragX/dragY to render at the constrained position
-            this.dragX = this.lastValidGridX * this.renderer.tileSize + this.renderer.dragOffset.x;
-            this.dragY = this.lastValidGridY * this.renderer.tileSize + this.renderer.dragOffset.y;
+            // Smooth dragging: follow the touch directly (not snapped to grid)
+            this.dragX = coords.x;
+            this.dragY = coords.y;
             
         } else if (this.dragType === 'obstacle' && this.renderer.getSelectedObstacle()) {
             const obstacle = this.renderer.getSelectedObstacle();
             
-            // Calculate target grid position
+            // Calculate target grid position for validation
             const targetGridPos = this.renderer.pixelToGrid(
                 coords.x - this.renderer.dragOffset.x,
                 coords.y - this.renderer.dragOffset.y
             );
             
-            // Update the last valid position by following a valid path
+            // Update the last valid position by following a valid path (for drop)
             this.updateValidDragPosition(obstacle, targetGridPos.x, targetGridPos.y, 'obstacle');
             
-            // Update dragX/dragY to render at the constrained position
-            this.dragX = this.lastValidGridX * this.renderer.tileSize + this.renderer.dragOffset.x;
-            this.dragY = this.lastValidGridY * this.renderer.tileSize + this.renderer.dragOffset.y;
+            // Smooth dragging: follow the touch directly (not snapped to grid)
+            this.dragX = coords.x;
+            this.dragY = coords.y;
         }
     }
 

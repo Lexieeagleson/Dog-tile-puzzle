@@ -198,12 +198,9 @@ class Renderer {
         if (this.selectedObstacle) {
             let baseX, baseY;
             if (dragX !== null && dragY !== null) {
-                const gridPos = this.pixelToGrid(
-                    dragX - this.dragOffset.x,
-                    dragY - this.dragOffset.y
-                );
-                baseX = gridPos.x;
-                baseY = gridPos.y;
+                // Convert drag pixel position to fractional grid for smooth dragging
+                baseX = (dragX - this.dragOffset.x) / this.tileSize;
+                baseY = (dragY - this.dragOffset.y) / this.tileSize;
                 this.ctx.globalAlpha = 0.8;
             } else {
                 baseX = this.selectedObstacle.x;
@@ -307,12 +304,10 @@ class Renderer {
         // Draw selected block on top (possibly at drag position)
         if (this.selectedBlock && !this.selectedBlock.isComplete()) {
             if (dragX !== null && dragY !== null) {
-                // Convert drag pixel position to grid
-                const gridPos = this.pixelToGrid(
-                    dragX - this.dragOffset.x,
-                    dragY - this.dragOffset.y
-                );
-                this.drawBlock(this.selectedBlock, gridPos.x, gridPos.y, 0.8);
+                // Convert drag pixel position to fractional grid for smooth dragging
+                const gridX = (dragX - this.dragOffset.x) / this.tileSize;
+                const gridY = (dragY - this.dragOffset.y) / this.tileSize;
+                this.drawBlock(this.selectedBlock, gridX, gridY, 0.8);
             } else {
                 this.drawBlock(this.selectedBlock, this.selectedBlock.x, this.selectedBlock.y, 1, true);
             }
