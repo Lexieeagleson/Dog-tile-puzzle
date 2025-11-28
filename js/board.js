@@ -320,10 +320,17 @@ class Board {
     canBlockRotate(block) {
         if (!block.rotatable) return false;
         
-        // Get next rotation
-        const rotations = BLOCK_SHAPES[block.shape].rotations;
-        const nextRotationIndex = (block.rotationIndex + 1) % rotations.length;
-        const nextCoords = rotations[nextRotationIndex];
+        // Get next rotation coordinates
+        let nextCoords;
+        const shapeData = BLOCK_SHAPES[block.shape];
+        if (shapeData && shapeData.rotations) {
+            const rotations = shapeData.rotations;
+            const nextRotationIndex = (block.rotationIndex + 1) % rotations.length;
+            nextCoords = rotations[nextRotationIndex];
+        } else {
+            // For custom shapes, calculate rotated coords dynamically
+            nextCoords = rotateCoords90CW(block.coords);
+        }
         
         // Check each tile of rotated position
         for (const [dx, dy] of nextCoords) {
