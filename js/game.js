@@ -101,7 +101,7 @@ const LEVELS = [
         ],
         dogs: [
             { color: "green", x: 3, y: 5 },
-            { color: "green", x: 6, y: 3 },
+            { color: "green", x: 6, y: 5 },
             { color: "red", x: 2, y: 6 }
         ],
         walls: [
