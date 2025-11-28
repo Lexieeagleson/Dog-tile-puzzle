@@ -5,7 +5,9 @@
 
 // Rendering configuration constants
 const RENDER_CONFIG = {
-    ANIMATION_SPEED: 0.15  // Animation progress per frame (higher = faster animation)
+    ANIMATION_SPEED: 0.15,  // Animation progress per frame (higher = faster animation)
+    BLOCK_PADDING: 3,       // Padding from tile edges for block shapes
+    HIGHLIGHT_OPACITY: 0.5  // Opacity for inner highlight effects
 };
 
 class Renderer {
@@ -323,6 +325,7 @@ class Renderer {
     drawBlock(block, gridX, gridY, alpha = 1, selected = false) {
         const remaining = block.getRemainingDogs();
         const colors = ASSETS.colors[block.color] || { main: '#888', dark: '#555', light: '#aaa' };
+        const padding = RENDER_CONFIG.BLOCK_PADDING;
         
         this.ctx.globalAlpha = alpha;
         
@@ -334,9 +337,6 @@ class Renderer {
         const ys = block.coords.map(([, dy]) => dy);
         const centerX = (Math.min(...xs) + Math.max(...xs) + 1) / 2;
         const centerY = (Math.min(...ys) + Math.max(...ys) + 1) / 2;
-        
-        // Padding from tile edges for the block shape
-        const padding = 3;
         
         // Calculate bounds for gradient
         const minPy = (gridY + Math.min(...ys)) * this.tileSize;
@@ -377,11 +377,12 @@ class Renderer {
             this.ctx.fillRect(px, py, this.tileSize - padding * 2, (this.tileSize - padding * 2) * 0.5);
         }
         
-        // Draw only the outer border edges (not between adjacent tiles)
+        // Draw only the outer border edges (not between adjacent tiles) - combined into single path
         this.ctx.strokeStyle = colors.dark;
         this.ctx.lineWidth = 2;
         this.ctx.lineCap = 'round';
         this.ctx.lineJoin = 'round';
+        this.ctx.beginPath();
         
         for (const [dx, dy] of block.coords) {
             const px = (gridX + dx) * this.tileSize + padding;
@@ -395,39 +396,30 @@ class Renderer {
             const hasRight = coordSet.has(`${dx + 1},${dy}`);
             
             // Draw only edges that are on the boundary
-            this.ctx.beginPath();
             if (!hasTop) {
                 this.ctx.moveTo(px, py);
                 this.ctx.lineTo(px + size, py);
             }
-            this.ctx.stroke();
-            
-            this.ctx.beginPath();
             if (!hasRight) {
                 this.ctx.moveTo(px + size, py);
                 this.ctx.lineTo(px + size, py + size);
             }
-            this.ctx.stroke();
-            
-            this.ctx.beginPath();
             if (!hasBottom) {
                 this.ctx.moveTo(px + size, py + size);
                 this.ctx.lineTo(px, py + size);
             }
-            this.ctx.stroke();
-            
-            this.ctx.beginPath();
             if (!hasLeft) {
                 this.ctx.moveTo(px, py + size);
                 this.ctx.lineTo(px, py);
             }
-            this.ctx.stroke();
         }
+        this.ctx.stroke();
         
-        // Draw inner highlight on outer edges only
+        // Draw inner highlight on outer edges only - combined into single path
         this.ctx.strokeStyle = colors.light;
         this.ctx.lineWidth = 1;
-        this.ctx.globalAlpha = alpha * 0.5;
+        this.ctx.globalAlpha = alpha * RENDER_CONFIG.HIGHLIGHT_OPACITY;
+        this.ctx.beginPath();
         
         for (const [dx, dy] of block.coords) {
             const px = (gridX + dx) * this.tileSize + padding + 2;
@@ -438,20 +430,16 @@ class Renderer {
             const hasLeft = coordSet.has(`${dx - 1},${dy}`);
             
             // Draw highlight on top and left edges only (light source from top-left)
-            this.ctx.beginPath();
             if (!hasTop) {
                 this.ctx.moveTo(px, py);
                 this.ctx.lineTo(px + size, py);
             }
-            this.ctx.stroke();
-            
-            this.ctx.beginPath();
             if (!hasLeft) {
                 this.ctx.moveTo(px, py);
                 this.ctx.lineTo(px, py + size);
             }
-            this.ctx.stroke();
         }
+        this.ctx.stroke();
         
         this.ctx.globalAlpha = alpha;
         
@@ -472,11 +460,12 @@ class Renderer {
         this.ctx.textBaseline = 'middle';
         this.ctx.fillText(remaining.toString(), numberX, numberY + 1);
         
-        // Draw selection highlight on outer edges only
+        // Draw selection highlight on outer edges only - combined into single path
         if (selected) {
             this.ctx.strokeStyle = '#ffeb3b';
             this.ctx.lineWidth = 3;
             this.ctx.globalAlpha = alpha;
+            this.ctx.beginPath();
             
             for (const [dx, dy] of block.coords) {
                 const px = (gridX + dx) * this.tileSize + padding - 1;
@@ -488,34 +477,24 @@ class Renderer {
                 const hasLeft = coordSet.has(`${dx - 1},${dy}`);
                 const hasRight = coordSet.has(`${dx + 1},${dy}`);
                 
-                this.ctx.beginPath();
                 if (!hasTop) {
                     this.ctx.moveTo(px, py);
                     this.ctx.lineTo(px + size, py);
                 }
-                this.ctx.stroke();
-                
-                this.ctx.beginPath();
                 if (!hasRight) {
                     this.ctx.moveTo(px + size, py);
                     this.ctx.lineTo(px + size, py + size);
                 }
-                this.ctx.stroke();
-                
-                this.ctx.beginPath();
                 if (!hasBottom) {
                     this.ctx.moveTo(px + size, py + size);
                     this.ctx.lineTo(px, py + size);
                 }
-                this.ctx.stroke();
-                
-                this.ctx.beginPath();
                 if (!hasLeft) {
                     this.ctx.moveTo(px, py + size);
                     this.ctx.lineTo(px, py);
                 }
-                this.ctx.stroke();
             }
+            this.ctx.stroke();
         }
         
         this.ctx.globalAlpha = 1;
