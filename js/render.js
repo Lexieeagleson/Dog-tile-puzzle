@@ -96,16 +96,6 @@ class Renderer {
         // Draw blocks (non-selected first, then selected on top)
         this.drawBlocks(dragX, dragY);
         
-        // Draw drop preview if dragging block
-        if (this.selectedBlock && dragX !== null && dragY !== null) {
-            this.drawDropPreview(dragX, dragY, 'block');
-        }
-        
-        // Draw drop preview if dragging obstacle
-        if (this.selectedObstacle && dragX !== null && dragY !== null) {
-            this.drawDropPreview(dragX, dragY, 'obstacle');
-        }
-        
         // Draw animations
         this.drawAnimations();
     }
@@ -490,43 +480,6 @@ class Renderer {
                 }
             }
             this.ctx.stroke();
-        }
-        
-        this.ctx.globalAlpha = 1;
-    }
-
-    /**
-     * Draw drop preview (valid/invalid position indicator)
-     * Now handles multi-cell obstacles
-     */
-    drawDropPreview(dragX, dragY, entityType = 'block') {
-        const gridPos = this.pixelToGrid(
-            dragX - this.dragOffset.x,
-            dragY - this.dragOffset.y
-        );
-        
-        let canMove;
-        if (entityType === 'block') {
-            canMove = this.board.canBlockMoveTo(this.selectedBlock, gridPos.x, gridPos.y);
-            this.ctx.globalAlpha = 0.3;
-            this.ctx.fillStyle = canMove ? '#4CAF50' : '#f44336';
-            
-            for (const [dx, dy] of this.selectedBlock.coords) {
-                const px = (gridPos.x + dx) * this.tileSize;
-                const py = (gridPos.y + dy) * this.tileSize;
-                this.ctx.fillRect(px, py, this.tileSize, this.tileSize);
-            }
-        } else if (entityType === 'obstacle') {
-            canMove = this.board.canObstacleMoveTo(this.selectedObstacle, gridPos.x, gridPos.y);
-            this.ctx.globalAlpha = 0.3;
-            this.ctx.fillStyle = canMove ? '#4CAF50' : '#f44336';
-            
-            // Draw preview for all tiles of the obstacle
-            for (const [dx, dy] of this.selectedObstacle.coords) {
-                const px = (gridPos.x + dx) * this.tileSize;
-                const py = (gridPos.y + dy) * this.tileSize;
-                this.ctx.fillRect(px, py, this.tileSize, this.tileSize);
-            }
         }
         
         this.ctx.globalAlpha = 1;
