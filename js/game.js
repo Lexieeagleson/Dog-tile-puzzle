@@ -418,7 +418,8 @@ const LEVELS = [
         walls: [
             { x: 4, y: 4 }, { x: 5, y: 4 },
             { x: 4, y: 5 }, { x: 5, y: 5 },
-            { x: 2, y: 2 }, { x: 7, y: 7 }
+            { x: 2, y: 2 }, { x: 2, y: 3 },
+            { x: 7, y: 7 }, { x: 7, y: 6 }
         ]
     },
     // Level 10 - Final challenge
