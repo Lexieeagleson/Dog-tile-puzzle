@@ -101,7 +101,7 @@ const LEVELS = [
         ],
         dogs: [
             { color: "green", x: 3, y: 5 },
-            { color: "green", x: 6, y: 3 },
+            { color: "green", x: 6, y: 5 },
             { color: "red", x: 2, y: 6 }
         ],
         walls: [
@@ -188,7 +188,7 @@ const LEVELS = [
             { color: "green", x: 3, y: 4 },
             { color: "green", x: 7, y: 4 },
             { color: "blue", x: 4, y: 7 },
-            { color: "blue", x: 6, y: 2 }
+            { color: "blue", x: 6, y: 3 }
         ],
         walls: [
             { x: 4, y: 4 }, { x: 5, y: 4 }, { x: 4, y: 5 }, { x: 5, y: 5 }
@@ -413,7 +413,7 @@ const LEVELS = [
             { color: "red", x: 8, y: 3 },
             { color: "red", x: 4, y: 6 },
             { color: "blue", x: 3, y: 8 },
-            { color: "blue", x: 7, y: 2 }
+            { color: "blue", x: 6, y: 3 }
         ],
         walls: [
             { x: 4, y: 4 }, { x: 5, y: 4 },
@@ -481,7 +481,7 @@ const LEVELS = [
         ],
         dogs: [
             { color: "red", x: 8, y: 8 },
-            { color: "red", x: 3, y: 5 },
+            { color: "red", x: 3, y: 6 },
             { color: "blue", x: 1, y: 8 },
             { color: "blue", x: 5, y: 3 },
             { color: "green", x: 7, y: 4 },

@@ -136,6 +136,25 @@ class Board {
         
         // Load dogs
         this.dogManager.loadFromLevel(levelData.dogs);
+        
+        // Validate that no blocks overlap with dogs at start
+        this.validateNoOverlaps();
+    }
+
+    /**
+     * Validate that no blocks overlap with dogs at start of level
+     * Logs warnings if overlaps are detected
+     */
+    validateNoOverlaps() {
+        for (const block of this.blocks) {
+            const blockCoords = block.getAbsoluteCoords();
+            for (const [x, y] of blockCoords) {
+                const dog = this.dogManager.getDogAt(x, y);
+                if (dog) {
+                    console.warn(`Level validation error: Block ${block.id} overlaps with ${dog.color} dog at (${x}, ${y})`);
+                }
+            }
+        }
     }
 
     /**
