@@ -1073,7 +1073,11 @@ class Game {
     startRenderLoop() {
         const renderFrame = () => {
             if (this.isDragging) {
-                this.renderer.render(this.dragX, this.dragY);
+                // Use the constrained valid grid position for rendering
+                // This prevents blocks from visually floating over obstacles
+                const validPixelX = this.lastValidGridX * this.renderer.tileSize + this.renderer.dragOffset.x;
+                const validPixelY = this.lastValidGridY * this.renderer.tileSize + this.renderer.dragOffset.y;
+                this.renderer.render(validPixelX, validPixelY);
             } else {
                 this.renderer.render();
             }
