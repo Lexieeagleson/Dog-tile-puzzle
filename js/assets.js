@@ -162,11 +162,6 @@ const ASSETS = {
                 </defs>
                 <rect width="50" height="50" fill="url(#floorGrad)"/>
                 <rect x="0" y="0" width="50" height="50" fill="none" stroke="#E4E4E7" stroke-width="1"/>
-                <!-- Subtle corner accent -->
-                <circle cx="2" cy="2" r="1" fill="#D4D4D8" opacity="0.5"/>
-                <circle cx="48" cy="2" r="1" fill="#D4D4D8" opacity="0.5"/>
-                <circle cx="2" cy="48" r="1" fill="#D4D4D8" opacity="0.5"/>
-                <circle cx="48" cy="48" r="1" fill="#D4D4D8" opacity="0.5"/>
             </svg>
         `;
         return this.svgToDataUrl(svg);

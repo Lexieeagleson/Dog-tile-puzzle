@@ -6,8 +6,8 @@
     --primary-color: #4B5563;          /* Gray 600 - Primary brand */
     --primary-light: #6B7280;          /* Gray 500 */
     --primary-dark: #374151;           /* Gray 700 */
-    --accent-color: #4B5563;           /* Gray 600 - Primary accent */
-    --accent-hover: #374151;           /* Gray 700 on hover */
+    --accent-color: #6B7280;           /* Gray 500 - Primary accent */
+    --accent-hover: #4B5563;           /* Gray 600 on hover */
     --success-color: #22C55E;          /* Green 500 */
     
     /* Neutral backgrounds */
@@ -15,7 +15,7 @@
     --bg-secondary: #F9FAFB;           /* Gray 50 */
     --bg-tertiary: #F3F4F6;            /* Gray 100 */
     --bg-card: #FFFFFF;
-    --bg-page: linear-gradient(135deg, #4B5563 0%, #6B7280 50%, #374151 100%);
+    --bg-page: linear-gradient(135deg, #374151 0%, #4B5563 50%, #374151 100%);
     
     /* Text colors - WCAG AA compliant */
     --text-primary: #111827;           /* Gray 900 - High contrast */
@@ -26,9 +26,9 @@
     --border-light: #E5E7EB;           /* Gray 200 */
     --border-medium: #D1D5DB;          /* Gray 300 */
     
-    /* Button styles - Unified neutral design */
-    --btn-primary-bg: #4B5563;
-    --btn-primary-hover: #374151;
+    /* Button styles - Lighter than background */
+    --btn-primary-bg: #6B7280;         /* Gray 500 - Lighter than background */
+    --btn-primary-hover: #9CA3AF;      /* Gray 400 - Even lighter on hover */
     
     /* Shadows - Subtle and professional */
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
@@ -114,7 +114,7 @@ header h1 {
     color: white;
     cursor: pointer;
     transition: all 0.2s ease;
-    box-shadow: var(--shadow-sm);
+    box-shadow: none;
 }
 
 .level-btn:hover {
@@ -125,11 +125,11 @@ header h1 {
 
 .level-btn:active {
     transform: translateY(0);
-    box-shadow: var(--shadow-sm);
+    box-shadow: none;
 }
 
 .level-btn:focus-visible {
-    outline: 2px solid var(--accent-color);
+    outline: 2px solid white;
     outline-offset: 2px;
 }
 
