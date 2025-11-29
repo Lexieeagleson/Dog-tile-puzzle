@@ -32,6 +32,35 @@ class Obstacle {
             console.warn(`Obstacle at (${this.x}, ${this.y}) was created without coords. Obstacles should be at least 2 cells minimum.`);
             this.coords = [[0, 0]];
         }
+        
+        // Validate that obstacle is not square-shaped (has at least one open side)
+        if (this.hasSquareShape()) {
+            console.warn(`Obstacle ${this.id} at (${this.x}, ${this.y}) forms a square shape. Stone obstacles should always have at least one open side.`);
+        }
+    }
+
+    /**
+     * Check if this obstacle contains any 2x2 square formation anywhere within its shape
+     * Stone obstacles should have at least one open side (not be square-shaped)
+     * @returns {boolean} True if obstacle contains a 2x2 square formation
+     */
+    hasSquareShape() {
+        if (this.coords.length < 4) return false;
+        
+        const coordSet = new Set(this.coords.map(([x, y]) => `${x},${y}`));
+        
+        for (const [x, y] of this.coords) {
+            // Check if this cell is the top-left corner of a 2x2 square
+            const hasRight = coordSet.has(`${x + 1},${y}`);
+            const hasBottom = coordSet.has(`${x},${y + 1}`);
+            const hasDiagonal = coordSet.has(`${x + 1},${y + 1}`);
+            
+            if (hasRight && hasBottom && hasDiagonal) {
+                return true;
+            }
+        }
+        
+        return false;
     }
 
     /**
