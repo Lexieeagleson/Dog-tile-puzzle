@@ -10,6 +10,7 @@
     --accent-hover: #2563EB;           /* Blue 600 */
     --success-color: #22C55E;          /* Green 500 */
     --warning-color: #F59E0B;          /* Amber 500 */
+    --warning-hover: #D97706;          /* Amber 600 */
     
     /* Neutral backgrounds */
     --bg-primary: #FFFFFF;
@@ -306,7 +307,7 @@ header h1 {
 }
 
 #replay-btn:hover {
-    background: #D97706;
+    background: var(--warning-hover);
 }
 
 #levels-btn {
