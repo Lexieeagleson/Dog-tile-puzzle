@@ -22,7 +22,7 @@ A fun browser-based puzzle game where you move color-coded Tetris-like blocks to
 - **Color-coded mechanics**: Red blocks rescue red dogs, blue blocks rescue blue dogs, etc.
 - **Multiple block sizes**: Blocks can be 2-6 squares (dominoes, triominoes, tetrominoes, pentominoes, hexominoes)
 - **Various block shapes**: I, L, J, T, O shapes and more (I2, I3, L3, I5, L5, T5, P, U, I6, L6, C)
-- **10 challenging levels** with increasing difficulty
+- **30 challenging levels** with increasing difficulty
 - **Beautiful SVG graphics** generated and embedded in the game
 - **Animations** for dog rescues and block disappearances
 - **Mobile-friendly** with touch support
