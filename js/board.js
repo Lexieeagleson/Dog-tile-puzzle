@@ -40,7 +40,7 @@ class Obstacle {
     }
 
     /**
-     * Check if this obstacle contains any 2x2 square formation
+     * Check if this obstacle contains any 2x2 square formation anywhere within its shape
      * Stone obstacles should have at least one open side (not be square-shaped)
      * @returns {boolean} True if obstacle contains a 2x2 square formation
      */
