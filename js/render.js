@@ -227,7 +227,7 @@ class Renderer {
         
         // Draw selection highlight
         if (selected) {
-            this.ctx.strokeStyle = '#ffeb3b';
+            this.ctx.strokeStyle = '#06B6D4'; // Modern cyan accent color
             this.ctx.lineWidth = 3;
             this.ctx.strokeRect(px + 1, py + 1, this.tileSize - 2, this.tileSize - 2);
         }
@@ -447,7 +447,7 @@ class Renderer {
         
         // Draw selection highlight on outer edges only - combined into single path
         if (selected) {
-            this.ctx.strokeStyle = '#ffeb3b';
+            this.ctx.strokeStyle = '#06B6D4'; // Modern cyan accent color
             this.ctx.lineWidth = 3;
             this.ctx.globalAlpha = alpha;
             this.ctx.beginPath();
@@ -524,28 +524,28 @@ class Renderer {
             const anim = this.animations[i];
             
             if (anim.type === 'rescue') {
-                // Draw sparkle effect
+                // Draw sparkle effect with modern colors
                 const progress = anim.frame / anim.maxFrames;
                 const radius = 10 + progress * 25;
                 const alpha = 1 - progress;
                 
                 this.ctx.globalAlpha = alpha;
-                this.ctx.strokeStyle = '#ffd700';
+                this.ctx.strokeStyle = '#10B981'; // Emerald success color
                 this.ctx.lineWidth = 3;
                 this.ctx.beginPath();
                 this.ctx.arc(anim.x, anim.y, radius, 0, Math.PI * 2);
                 this.ctx.stroke();
                 
-                // Draw stars using canvas drawing instead of Unicode characters
+                // Draw sparkles using canvas drawing
                 const starCount = 5;
                 for (let j = 0; j < starCount; j++) {
                     const angle = (j / starCount) * Math.PI * 2 + progress * Math.PI;
                     const starX = anim.x + Math.cos(angle) * radius;
                     const starY = anim.y + Math.sin(angle) * radius;
-                    this.ctx.fillStyle = '#ffeb3b';
-                    // Draw a simple star shape
+                    this.ctx.fillStyle = '#34D399'; // Light emerald
+                    // Draw a simple circle sparkle
                     this.ctx.beginPath();
-                    this.ctx.arc(starX, starY, 3, 0, Math.PI * 2);
+                    this.ctx.arc(starX, starY, 4, 0, Math.PI * 2);
                     this.ctx.fill();
                 }
                 
@@ -553,7 +553,7 @@ class Renderer {
             } else if (anim.type === 'disappear') {
                 // Draw poof effect
                 const progress = anim.frame / anim.maxFrames;
-                const colors = ASSETS.colors[anim.color] || { light: '#ccc' };
+                const colors = ASSETS.colors[anim.color] || { light: '#D4D4D8' };
                 const alpha = 1 - progress;
                 const radius = progress * 30;
                 
