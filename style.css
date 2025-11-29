@@ -1,40 +1,40 @@
 /* Dog Rescue Puzzle - Main Styles */
-/* Professional UI Design - Indigo/Violet color scheme with WCAG accessibility compliance */
+/* Professional UI Design - Muted neutral gray color scheme with WCAG accessibility compliance */
 
 :root {
-    /* Indigo/Violet-based color palette */
-    --primary-color: #5B4FC4;          /* Indigo - Primary brand */
-    --primary-light: #7C6FD6;          /* Lighter Indigo */
-    --primary-dark: #4338CA;           /* Darker Indigo */
-    --accent-color: #5B4FC4;           /* Indigo - Primary accent */
-    --accent-hover: #4338CA;           /* Darker on hover */
+    /* Muted neutral gray color palette */
+    --primary-color: #4B5563;          /* Gray 600 - Primary brand */
+    --primary-light: #6B7280;          /* Gray 500 */
+    --primary-dark: #374151;           /* Gray 700 */
+    --accent-color: #4B5563;           /* Gray 600 - Primary accent */
+    --accent-hover: #374151;           /* Gray 700 on hover */
     --success-color: #22C55E;          /* Green 500 */
     
     /* Neutral backgrounds */
     --bg-primary: #FFFFFF;
-    --bg-secondary: #F5F3FF;           /* Very light violet */
-    --bg-tertiary: #EDE9FE;            /* Light violet */
+    --bg-secondary: #F9FAFB;           /* Gray 50 */
+    --bg-tertiary: #F3F4F6;            /* Gray 100 */
     --bg-card: #FFFFFF;
-    --bg-page: linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #7C3AED 100%);
+    --bg-page: linear-gradient(135deg, #4B5563 0%, #6B7280 50%, #374151 100%);
     
     /* Text colors - WCAG AA compliant */
-    --text-primary: #1E1B4B;           /* Dark indigo - High contrast */
-    --text-secondary: #3730A3;         /* Indigo 800 */
-    --text-muted: #4F46E5;             /* Indigo 600 */
+    --text-primary: #111827;           /* Gray 900 - High contrast */
+    --text-secondary: #374151;         /* Gray 700 */
+    --text-muted: #6B7280;             /* Gray 500 */
     
     /* Border colors */
-    --border-light: #C7D2FE;           /* Indigo 200 */
-    --border-medium: #A5B4FC;          /* Indigo 300 */
+    --border-light: #E5E7EB;           /* Gray 200 */
+    --border-medium: #D1D5DB;          /* Gray 300 */
     
-    /* Button styles - Unified indigo design */
-    --btn-primary-bg: #5B4FC4;
-    --btn-primary-hover: #4338CA;
+    /* Button styles - Unified neutral design */
+    --btn-primary-bg: #4B5563;
+    --btn-primary-hover: #374151;
     
     /* Shadows - Subtle and professional */
-    --shadow-sm: 0 1px 2px rgba(99, 102, 241, 0.08);
-    --shadow-md: 0 4px 6px -1px rgba(99, 102, 241, 0.12), 0 2px 4px -1px rgba(99, 102, 241, 0.06);
-    --shadow-lg: 0 10px 15px -3px rgba(99, 102, 241, 0.12), 0 4px 6px -2px rgba(99, 102, 241, 0.06);
-    --shadow-xl: 0 20px 25px -5px rgba(99, 102, 241, 0.15), 0 10px 10px -5px rgba(99, 102, 241, 0.08);
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
     
     /* Border radius - Clean and consistent */
     --radius-sm: 8px;
@@ -368,16 +368,16 @@ header h1 {
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
     :root {
-        --bg-primary: #0F172A;
-        --bg-secondary: #1E1B4B;
-        --bg-tertiary: #312E81;
-        --bg-card: #1E293B;
-        --bg-page: linear-gradient(135deg, #312E81 0%, #1E1B4B 50%, #0F172A 100%);
-        --text-primary: #F5F3FF;
-        --text-secondary: #C7D2FE;
-        --text-muted: #A5B4FC;
-        --border-light: #3730A3;
-        --border-medium: #4F46E5;
+        --bg-primary: #111827;
+        --bg-secondary: #1F2937;
+        --bg-tertiary: #374151;
+        --bg-card: #1F2937;
+        --bg-page: linear-gradient(135deg, #1F2937 0%, #374151 50%, #111827 100%);
+        --text-primary: #F9FAFB;
+        --text-secondary: #E5E7EB;
+        --text-muted: #9CA3AF;
+        --border-light: #374151;
+        --border-medium: #4B5563;
     }
     
     #game-container {
