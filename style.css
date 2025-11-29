@@ -1,42 +1,50 @@
 /* Dog Rescue Puzzle - Main Styles */
-/* Modern UI Design - Updated color scheme with WCAG accessibility compliance */
+/* Professional UI Design - Clean slate color scheme with WCAG accessibility compliance */
 
 :root {
-    /* Modern color palette with good contrast ratios (WCAG AA compliant) */
-    --primary-gradient-start: #4F46E5; /* Indigo 600 */
-    --primary-gradient-end: #7C3AED;   /* Violet 600 */
-    --accent-color: #06B6D4;           /* Cyan 500 */
-    --success-color: #10B981;          /* Emerald 500 */
+    /* Professional slate-based color palette */
+    --primary-color: #1E293B;          /* Slate 800 - Primary brand */
+    --primary-light: #334155;          /* Slate 700 */
+    --primary-dark: #0F172A;           /* Slate 900 */
+    --accent-color: #3B82F6;           /* Blue 500 - Primary accent */
+    --accent-hover: #2563EB;           /* Blue 600 */
+    --success-color: #22C55E;          /* Green 500 */
     --warning-color: #F59E0B;          /* Amber 500 */
-    --danger-color: #EF4444;           /* Red 500 */
     
-    /* Neutral colors */
-    --bg-primary: #FAFAFA;
-    --bg-secondary: #F4F4F5;
-    --bg-tertiary: #E4E4E7;
-    --text-primary: #18181B;           /* Contrast ratio 16.1:1 on white */
-    --text-secondary: #3F3F46;         /* Contrast ratio 9.5:1 on white */
-    --text-muted: #71717A;             /* Contrast ratio 5.5:1 on white */
+    /* Neutral backgrounds */
+    --bg-primary: #FFFFFF;
+    --bg-secondary: #F8FAFC;           /* Slate 50 */
+    --bg-tertiary: #F1F5F9;            /* Slate 100 */
+    --bg-card: #FFFFFF;
     
-    /* Button colors */
-    --btn-primary-bg: linear-gradient(145deg, #4F46E5 0%, #4338CA 100%);
-    --btn-primary-hover: linear-gradient(145deg, #6366F1 0%, #4F46E5 100%);
-    --btn-success-bg: linear-gradient(145deg, #10B981 0%, #059669 100%);
-    --btn-success-hover: linear-gradient(145deg, #34D399 0%, #10B981 100%);
-    --btn-warning-bg: linear-gradient(145deg, #F59E0B 0%, #D97706 100%);
-    --btn-secondary-bg: linear-gradient(145deg, #6366F1 0%, #7C3AED 100%);
+    /* Text colors - WCAG AA compliant */
+    --text-primary: #0F172A;           /* Slate 900 - Contrast 18.1:1 */
+    --text-secondary: #475569;         /* Slate 600 - Contrast 7.1:1 */
+    --text-muted: #64748B;             /* Slate 500 - Contrast 4.6:1 */
     
-    /* Shadows */
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    /* Border colors */
+    --border-light: #E2E8F0;           /* Slate 200 */
+    --border-medium: #CBD5E1;          /* Slate 300 */
+    
+    /* Button styles - Professional flat design */
+    --btn-primary-bg: #1E293B;
+    --btn-primary-hover: #334155;
+    --btn-accent-bg: #3B82F6;
+    --btn-accent-hover: #2563EB;
+    --btn-secondary-bg: #64748B;
+    --btn-secondary-hover: #475569;
+    
+    /* Shadows - Subtle and professional */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
     --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
     
-    /* Border radius */
+    /* Border radius - Clean and consistent */
     --radius-sm: 6px;
-    --radius-md: 12px;
-    --radius-lg: 16px;
-    --radius-xl: 24px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
 }
 
 * {
@@ -47,7 +55,7 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -56,13 +64,13 @@ body {
 }
 
 #game-container {
-    background: var(--bg-primary);
+    background: var(--bg-card);
     border-radius: var(--radius-xl);
-    padding: 24px;
+    padding: 32px;
     box-shadow: var(--shadow-xl);
     max-width: 800px;
     width: 100%;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-light);
 }
 
 header h1 {
@@ -110,12 +118,12 @@ header h1 {
     color: white;
     cursor: pointer;
     transition: all 0.2s ease;
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-sm);
 }
 
 .level-btn:hover {
     transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-md);
     background: var(--btn-primary-hover);
 }
 
@@ -160,7 +168,7 @@ header h1 {
     font-weight: 500;
     border: none;
     border-radius: var(--radius-sm);
-    background: var(--btn-success-bg);
+    background: var(--btn-accent-bg);
     color: white;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -170,7 +178,7 @@ header h1 {
 .ui-btn:hover {
     transform: translateY(-1px);
     box-shadow: var(--shadow-md);
-    filter: brightness(1.05);
+    background: var(--btn-accent-hover);
 }
 
 .ui-btn:active {
@@ -188,7 +196,7 @@ header h1 {
 }
 
 #back-btn:hover {
-    background: linear-gradient(145deg, #818CF8 0%, #8B5CF6 100%);
+    background: var(--btn-secondary-hover);
 }
 
 /* Game Board */
@@ -199,15 +207,15 @@ header h1 {
     background: var(--bg-secondary);
     border-radius: var(--radius-lg);
     margin-bottom: 16px;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border-light);
 }
 
 #game-board {
-    border: 3px solid var(--text-secondary);
+    border: 2px solid var(--border-medium);
     border-radius: var(--radius-sm);
     cursor: pointer;
     background: var(--bg-tertiary);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-sm);
 }
 
 #status-bar {
@@ -218,7 +226,7 @@ header h1 {
     padding: 12px 16px;
     background: var(--bg-secondary);
     border-radius: var(--radius-md);
-    border: 1px solid var(--bg-tertiary);
+    border: 1px solid var(--border-light);
 }
 
 /* Victory Screen */
@@ -245,13 +253,13 @@ header h1 {
 }
 
 #victory-content {
-    background: var(--bg-primary);
+    background: var(--bg-card);
     padding: 40px 48px;
     border-radius: var(--radius-xl);
     text-align: center;
     animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     box-shadow: var(--shadow-xl);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--border-light);
 }
 
 @keyframes popIn {
@@ -286,19 +294,19 @@ header h1 {
 }
 
 #next-level-btn {
-    background: var(--btn-primary-bg);
+    background: var(--btn-accent-bg);
 }
 
 #next-level-btn:hover {
-    background: var(--btn-primary-hover);
+    background: var(--btn-accent-hover);
 }
 
 #replay-btn {
-    background: var(--btn-warning-bg);
+    background: var(--warning-color);
 }
 
 #replay-btn:hover {
-    background: linear-gradient(145deg, #FBBF24 0%, #F59E0B 100%);
+    background: #D97706;
 }
 
 #levels-btn {
@@ -306,7 +314,7 @@ header h1 {
 }
 
 #levels-btn:hover {
-    background: linear-gradient(145deg, #818CF8 0%, #8B5CF6 100%);
+    background: var(--btn-secondary-hover);
 }
 
 /* Responsive */
@@ -348,28 +356,31 @@ header h1 {
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
     :root {
-        --bg-primary: #18181B;
-        --bg-secondary: #27272A;
-        --bg-tertiary: #3F3F46;
-        --text-primary: #FAFAFA;
-        --text-secondary: #D4D4D8;
-        --text-muted: #A1A1AA;
+        --bg-primary: #0F172A;
+        --bg-secondary: #1E293B;
+        --bg-tertiary: #334155;
+        --bg-card: #1E293B;
+        --text-primary: #F8FAFC;
+        --text-secondary: #CBD5E1;
+        --text-muted: #94A3B8;
+        --border-light: #334155;
+        --border-medium: #475569;
     }
     
     body {
-        background: linear-gradient(135deg, #1E1B4B 0%, #312E81 100%);
+        background: linear-gradient(135deg, #0F172A 0%, #020617 100%);
     }
     
     #game-container {
-        border-color: rgba(255, 255, 255, 0.05);
+        border-color: var(--border-light);
     }
     
     #game-board {
-        border-color: var(--text-muted);
+        border-color: var(--border-medium);
     }
     
     #victory-content {
-        border-color: rgba(255, 255, 255, 0.1);
+        border-color: var(--border-light);
     }
 }
 
