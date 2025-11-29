@@ -66,7 +66,7 @@ const ASSETS = {
                 <!-- Number badge with better contrast -->
                 <circle cx="25" cy="28" r="13" fill="rgba(0,0,0,0.3)"/>
                 <circle cx="25" cy="28" r="11" fill="rgba(255,255,255,0.15)"/>
-                <text x="25" y="33" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700" fill="white" text-anchor="middle" style="text-shadow: 0 1px 2px rgba(0,0,0,0.3)">${number}</text>
+                <text x="25" y="33" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="white" text-anchor="middle" style="text-shadow: 0 1px 2px rgba(0,0,0,0.3)">${number}</text>
                 ` : ''}
             </svg>
         `;
