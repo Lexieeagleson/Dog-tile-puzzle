@@ -17,6 +17,44 @@ A fun browser-based puzzle game where you move color-coded Tetris-like blocks to
 - **Undo button**: Undo your last move
 - **Reset button**: Restart the current level
 
+## 🎨 Modern UI Design
+
+The game features a modern, accessible UI design with:
+
+### Color Scheme
+The UI uses a carefully crafted color palette that meets WCAG AA accessibility standards:
+
+| Element | Color | Hex Code | Usage |
+|---------|-------|----------|-------|
+| Primary | Indigo | `#4F46E5` | Buttons, accents |
+| Secondary | Violet | `#7C3AED` | Backgrounds, gradients |
+| Accent | Cyan | `#06B6D4` | Highlights, focus states |
+| Success | Emerald | `#10B981` | Success states, UI buttons |
+| Warning | Amber | `#F59E0B` | Replay button |
+
+### Game Asset Colors
+| Color | Main | Dark | Light | Contrast |
+|-------|------|------|-------|----------|
+| Red | `#DC2626` | `#991B1B` | `#F87171` | WCAG AA |
+| Blue | `#2563EB` | `#1D4ED8` | `#60A5FA` | WCAG AA |
+| Green | `#16A34A` | `#15803D` | `#4ADE80` | WCAG AA |
+| Yellow | `#CA8A04` | `#A16207` | `#FACC15` | WCAG AA |
+| Purple | `#9333EA` | `#7E22CE` | `#C084FC` | WCAG AA |
+| Orange | `#EA580C` | `#C2410C` | `#FB923C` | WCAG AA |
+
+### Accessibility Features
+- **High contrast ratios**: All text meets WCAG AA standards (minimum 4.5:1 for normal text)
+- **Focus indicators**: Visible focus states for keyboard navigation
+- **Dark mode support**: Automatic dark mode based on system preferences
+- **Reduced motion**: Respects `prefers-reduced-motion` for users sensitive to animations
+- **Semantic HTML**: Proper heading structure and ARIA attributes
+
+### Design Elements
+- **Modern gradients**: Subtle linear gradients for depth
+- **Consistent border radius**: Unified rounded corners throughout
+- **Shadow system**: Layered shadows for visual hierarchy
+- **Responsive layout**: Adapts to mobile and desktop screens
+
 ## 🎨 Game Features
 
 - **Color-coded mechanics**: Red blocks rescue red dogs, blue blocks rescue blue dogs, etc.
@@ -108,23 +146,24 @@ Levels are defined in JSON format in `js/game.js`:
 }
 ```
 
-## 🎨 Color Palette
+## 🎨 In-Game Color Palette
 
-| Color  | Block & Dog | Use |
-|--------|-------------|-----|
-| Red    | 🔴 | Primary color |
-| Blue   | 🔵 | Primary color |
-| Green  | 🟢 | Primary color |
-| Yellow | 🟡 | Secondary color |
-| Purple | 🟣 | Secondary color |
-| Orange | 🟠 | Secondary color |
+| Color  | Block & Dog | Hex (Main) | Use |
+|--------|-------------|------------|-----|
+| Red    | 🔴 | `#DC2626` | Primary color |
+| Blue   | 🔵 | `#2563EB` | Primary color |
+| Green  | 🟢 | `#16A34A` | Primary color |
+| Yellow | 🟡 | `#CA8A04` | Secondary color |
+| Purple | 🟣 | `#9333EA` | Secondary color |
+| Orange | 🟠 | `#EA580C` | Secondary color |
 
 ## 🛠️ Technology
 
 - **Pure JavaScript** - No frameworks required
 - **HTML5 Canvas** - For smooth rendering
 - **SVG Graphics** - Scalable, generated assets
-- **CSS3** - Modern styling with gradients and animations
+- **CSS3** - Modern styling with CSS custom properties, gradients, and animations
+- **Accessibility** - WCAG AA compliant color contrast, keyboard navigation, reduced motion support
 
 ## 📜 License
 
