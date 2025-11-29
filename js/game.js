@@ -10,7 +10,8 @@ const GAME_CONFIG = {
     MAX_TILE_SIZE: 60,           // Maximum tile size in pixels
     MIN_TILE_SIZE: 40,           // Minimum tile size in pixels
     MAX_UNDO_STACK_SIZE: 50,     // Maximum number of undo states to store
-    VICTORY_DELAY_MS: 500        // Delay before showing victory screen
+    VICTORY_DELAY_MS: 500,       // Delay before showing victory screen
+    DRAG_SMOOTHING_FACTOR: 0.3   // Lerp factor for smooth drag animation (0-1, higher = faster)
 };
 
 // Level definitions embedded in the code
@@ -1853,6 +1854,9 @@ class Game {
         this.dragY = 0;
         this.lastValidGridX = 0;
         this.lastValidGridY = 0;
+        // Smooth position tracking for constrained drag animation
+        this.smoothDragX = 0;
+        this.smoothDragY = 0;
         this.animationFrame = null;
         
         // DOM Elements
@@ -2052,6 +2056,14 @@ class Game {
     }
 
     /**
+     * Initialize smooth drag position at the entity's current pixel position
+     */
+    initSmoothDragPosition(entity) {
+        this.smoothDragX = entity.x * this.renderer.tileSize + this.renderer.dragOffset.x;
+        this.smoothDragY = entity.y * this.renderer.tileSize + this.renderer.dragOffset.y;
+    }
+
+    /**
      * Handle mouse down
      */
     handleMouseDown(e) {
@@ -2067,6 +2079,9 @@ class Game {
             // Track the last valid grid position (starts at entity's current position)
             this.lastValidGridX = result.entity.x;
             this.lastValidGridY = result.entity.y;
+            
+            // Initialize smooth position at the entity's starting pixel position
+            this.initSmoothDragPosition(result.entity);
         }
     }
 
@@ -2210,6 +2225,9 @@ class Game {
                 // Track the last valid grid position (starts at entity's current position)
                 this.lastValidGridX = result.entity.x;
                 this.lastValidGridY = result.entity.y;
+                
+                // Initialize smooth position at the entity's starting pixel position
+                this.initSmoothDragPosition(result.entity);
             }
         }
     }
@@ -2412,9 +2430,17 @@ class Game {
     startRenderLoop() {
         const renderFrame = () => {
             if (this.isDragging) {
-                // Follow the cursor smoothly during drag for better UX
-                // The block will snap to a valid position when released
-                this.renderer.render(this.dragX, this.dragY);
+                // Calculate target pixel position based on last valid grid position
+                const targetX = this.lastValidGridX * this.renderer.tileSize + this.renderer.dragOffset.x;
+                const targetY = this.lastValidGridY * this.renderer.tileSize + this.renderer.dragOffset.y;
+                
+                // Smoothly interpolate towards the valid position (lerp)
+                const lerpFactor = GAME_CONFIG.DRAG_SMOOTHING_FACTOR;
+                this.smoothDragX += (targetX - this.smoothDragX) * lerpFactor;
+                this.smoothDragY += (targetY - this.smoothDragY) * lerpFactor;
+                
+                // Render at the smooth position (constrained but animated)
+                this.renderer.render(this.smoothDragX, this.smoothDragY);
             } else {
                 this.renderer.render();
             }
