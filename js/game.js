@@ -1956,8 +1956,8 @@ class Game {
         this.currentLevel = levelIndex;
         const levelData = LEVELS[levelIndex];
         
-        // Load the level
-        this.board.loadLevel(levelData);
+        // Load the level (pass 1-indexed level number for stone obstacle filtering)
+        this.board.loadLevel(levelData, levelIndex + 1);
         this.renderer.setBoard(this.board);
         
         // Validate level solvability - ensure blocks have enough space to navigate obstacles
