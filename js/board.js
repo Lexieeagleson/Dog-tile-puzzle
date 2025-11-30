@@ -144,20 +144,32 @@ class Board {
 
     /**
      * Load board from level data
+     * @param {object} levelData - Level configuration object
+     * @param {number} levelNumber - 1-indexed level number (optional, used to determine if stone obstacles should appear)
      */
-    loadLevel(levelData) {
+    loadLevel(levelData, levelNumber = null) {
         this.width = levelData.width;
         this.height = levelData.height;
-        this.walls = levelData.walls ? [...levelData.walls] : [];
         
-        // Check if level uses new obstacle format (with coords and explicit grouping)
-        if (levelData.obstacles && Array.isArray(levelData.obstacles)) {
-            // New format: obstacles are already grouped
-            this.obstacles = levelData.obstacles.map(o => new Obstacle(o));
+        // Stone obstacles only appear at level 15 and higher
+        const shouldShowStoneObstacles = levelNumber === null || levelNumber >= 15;
+        
+        if (shouldShowStoneObstacles) {
+            this.walls = levelData.walls ? [...levelData.walls] : [];
+            
+            // Check if level uses new obstacle format (with coords and explicit grouping)
+            if (levelData.obstacles && Array.isArray(levelData.obstacles)) {
+                // New format: obstacles are already grouped
+                this.obstacles = levelData.obstacles.map(o => new Obstacle(o));
+            } else {
+                // Legacy format: convert individual wall cells into grouped obstacles
+                // Group adjacent wall cells into multi-cell obstacles
+                this.obstacles = this.groupWallsIntoObstacles(this.walls);
+            }
         } else {
-            // Legacy format: convert individual wall cells into grouped obstacles
-            // Group adjacent wall cells into multi-cell obstacles
-            this.obstacles = this.groupWallsIntoObstacles(this.walls);
+            // Levels before 15 should not have stone obstacles
+            this.walls = [];
+            this.obstacles = [];
         }
         
         // Load blocks
