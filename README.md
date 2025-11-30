@@ -123,8 +123,8 @@ Levels are defined in JSON format in `js/game.js`:
 ```json
 {
   "name": "Level 1",
-  "width": 10,
-  "height": 10,
+  "width": 8,
+  "height": 8,
   "blocks": [
     {
       "id": "r1",

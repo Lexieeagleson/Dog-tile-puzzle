@@ -19,8 +19,8 @@ const LEVELS = [
     // Level 1 - Tutorial: Simple red dog rescue
     {
         name: "Level 1",
-        width: 6,
-        height: 6,
+        width: 8,
+        height: 8,
         blocks: [
             {
                 id: "r1",
@@ -150,8 +150,8 @@ const LEVELS = [
     // Level 5 - Three colors
     {
         name: "Level 5",
-        width: 9,
-        height: 9,
+        width: 8,
+        height: 8,
         blocks: [
             {
                 id: "r1",
@@ -169,7 +169,7 @@ const LEVELS = [
                 required: 2,
                 shape: "L",
                 coords: [[0, 0], [0, 1], [0, 2], [1, 2]],
-                x: 5,
+                x: 4,
                 y: 0,
                 rotatable: true
             },
@@ -180,26 +180,26 @@ const LEVELS = [
                 shape: "J",
                 coords: [[1, 0], [1, 1], [1, 2], [0, 2]],
                 x: 0,
-                y: 5,
+                y: 4,
                 rotatable: true
             }
         ],
         dogs: [
-            { color: "red", x: 7, y: 7 },
-            { color: "green", x: 3, y: 4 },
-            { color: "green", x: 7, y: 4 },
-            { color: "blue", x: 4, y: 7 },
-            { color: "blue", x: 6, y: 3 }
+            { color: "red", x: 6, y: 6 },
+            { color: "green", x: 2, y: 3 },
+            { color: "green", x: 6, y: 3 },
+            { color: "blue", x: 3, y: 6 },
+            { color: "blue", x: 5, y: 2 }
         ],
         walls: [
-            { x: 4, y: 4 }, { x: 5, y: 4 }, { x: 4, y: 5 }
+            { x: 3, y: 3 }, { x: 4, y: 3 }, { x: 3, y: 4 }
         ]
     },
     // Level 6 - Purple introduction
     {
         name: "Level 6",
-        width: 9,
-        height: 9,
+        width: 8,
+        height: 8,
         blocks: [
             {
                 id: "p1",
@@ -217,7 +217,7 @@ const LEVELS = [
                 required: 1,
                 shape: "L",
                 coords: [[0, 0], [0, 1], [0, 2], [1, 2]],
-                x: 6,
+                x: 5,
                 y: 0,
                 rotatable: true
             },
@@ -228,28 +228,28 @@ const LEVELS = [
                 shape: "J",
                 coords: [[1, 0], [1, 1], [1, 2], [0, 2]],
                 x: 0,
-                y: 6,
+                y: 5,
                 rotatable: true
             }
         ],
         dogs: [
-            { color: "purple", x: 4, y: 2 },
-            { color: "purple", x: 7, y: 6 },
-            { color: "red", x: 2, y: 4 },
-            { color: "yellow", x: 5, y: 7 },
-            { color: "yellow", x: 3, y: 6 }
+            { color: "purple", x: 3, y: 1 },
+            { color: "purple", x: 6, y: 5 },
+            { color: "red", x: 1, y: 3 },
+            { color: "yellow", x: 4, y: 6 },
+            { color: "yellow", x: 2, y: 5 }
         ],
         walls: [
-            { x: 3, y: 3 }, { x: 4, y: 3 }, { x: 5, y: 3 },
-            { x: 3, y: 4 }, { x: 5, y: 4 },
-            { x: 3, y: 5 }, { x: 4, y: 5 }, { x: 5, y: 5 }
+            { x: 2, y: 2 }, { x: 3, y: 2 }, { x: 4, y: 2 },
+            { x: 2, y: 3 }, { x: 4, y: 3 },
+            { x: 2, y: 4 }, { x: 3, y: 4 }, { x: 4, y: 4 }
         ]
     },
     // Level 7 - Orange blocks
     {
         name: "Level 7",
-        width: 10,
-        height: 10,
+        width: 8,
+        height: 8,
         blocks: [
             {
                 id: "o1",
@@ -267,7 +267,7 @@ const LEVELS = [
                 required: 2,
                 shape: "T",
                 coords: [[0, 0], [1, 0], [2, 0], [1, 1]],
-                x: 6,
+                x: 4,
                 y: 0,
                 rotatable: true
             },
@@ -278,29 +278,29 @@ const LEVELS = [
                 shape: "L",
                 coords: [[0, 0], [0, 1], [0, 2], [1, 2]],
                 x: 0,
-                y: 6,
+                y: 4,
                 rotatable: true
             }
         ],
         dogs: [
-            { color: "orange", x: 5, y: 3 },
-            { color: "orange", x: 8, y: 5 },
-            { color: "orange", x: 3, y: 8 },
-            { color: "blue", x: 2, y: 5 },
-            { color: "blue", x: 7, y: 8 },
-            { color: "green", x: 5, y: 6 }
+            { color: "orange", x: 3, y: 2 },
+            { color: "orange", x: 6, y: 3 },
+            { color: "orange", x: 2, y: 6 },
+            { color: "blue", x: 1, y: 3 },
+            { color: "blue", x: 5, y: 6 },
+            { color: "green", x: 3, y: 4 }
         ],
         walls: [
-            { x: 4, y: 4 }, { x: 5, y: 4 }, { x: 6, y: 4 },
-            { x: 4, y: 5 }, { x: 6, y: 5 },
-            { x: 4, y: 6 }, { x: 6, y: 6 }
+            { x: 3, y: 3 }, { x: 3, y: 3 }, { x: 4, y: 3 },
+            { x: 3, y: 3 }, { x: 4, y: 3 },
+            { x: 3, y: 4 }, { x: 4, y: 4 }
         ]
     },
     // Level 8 - Strategic rotation required
     {
         name: "Level 8",
-        width: 10,
-        height: 10,
+        width: 8,
+        height: 8,
         blocks: [
             {
                 id: "r1",
@@ -318,7 +318,7 @@ const LEVELS = [
                 required: 2,
                 shape: "J",
                 coords: [[1, 0], [1, 1], [1, 2], [0, 2]],
-                x: 8,
+                x: 6,
                 y: 0,
                 rotatable: true
             },
@@ -328,8 +328,8 @@ const LEVELS = [
                 required: 2,
                 shape: "T",
                 coords: [[0, 0], [1, 0], [2, 0], [1, 1]],
-                x: 3,
-                y: 7,
+                x: 2,
+                y: 5,
                 rotatable: true
             },
             {
@@ -339,30 +339,30 @@ const LEVELS = [
                 shape: "I",
                 coords: [[0, 0], [1, 0], [2, 0], [3, 0]],
                 x: 0,
-                y: 8,
+                y: 6,
                 rotatable: true
             }
         ],
         dogs: [
-            { color: "red", x: 8, y: 7 },
-            { color: "red", x: 3, y: 4 },
-            { color: "blue", x: 1, y: 5 },
-            { color: "blue", x: 6, y: 2 },
-            { color: "green", x: 7, y: 5 },
-            { color: "green", x: 2, y: 2 },
-            { color: "yellow", x: 5, y: 8 }
+            { color: "red", x: 6, y: 5 },
+            { color: "red", x: 2, y: 3 },
+            { color: "blue", x: 0, y: 3 },
+            { color: "blue", x: 4, y: 1 },
+            { color: "green", x: 5, y: 3 },
+            { color: "green", x: 1, y: 1 },
+            { color: "yellow", x: 3, y: 6 }
         ],
         walls: [
-            { x: 4, y: 3 }, { x: 5, y: 3 }, { x: 6, y: 3 },
-            { x: 4, y: 4 }, { x: 6, y: 4 },
-            { x: 4, y: 5 }, { x: 5, y: 5 }, { x: 6, y: 5 }
+            { x: 3, y: 2 }, { x: 3, y: 2 }, { x: 4, y: 2 },
+            { x: 3, y: 3 }, { x: 4, y: 3 },
+            { x: 3, y: 3 }, { x: 3, y: 3 }, { x: 4, y: 3 }
         ]
     },
     // Level 9 - Complex multi-block
     {
         name: "Level 9",
-        width: 10,
-        height: 10,
+        width: 8,
+        height: 8,
         blocks: [
             {
                 id: "p1",
@@ -380,7 +380,7 @@ const LEVELS = [
                 required: 2,
                 shape: "L",
                 coords: [[0, 0], [0, 1], [0, 2], [1, 2]],
-                x: 7,
+                x: 5,
                 y: 0,
                 rotatable: true
             },
@@ -391,7 +391,7 @@ const LEVELS = [
                 shape: "J",
                 coords: [[1, 0], [1, 1], [1, 2], [0, 2]],
                 x: 0,
-                y: 7,
+                y: 5,
                 rotatable: true
             },
             {
@@ -400,34 +400,34 @@ const LEVELS = [
                 required: 2,
                 shape: "I",
                 coords: [[0, 0], [1, 0], [2, 0], [3, 0]],
-                x: 5,
-                y: 8,
+                x: 3,
+                y: 6,
                 rotatable: true
             }
         ],
         dogs: [
-            { color: "purple", x: 3, y: 2 },
-            { color: "purple", x: 8, y: 6 },
-            { color: "orange", x: 2, y: 5 },
-            { color: "orange", x: 6, y: 4 },
-            { color: "red", x: 5, y: 1 },
-            { color: "red", x: 8, y: 3 },
-            { color: "red", x: 4, y: 6 },
-            { color: "blue", x: 3, y: 8 },
-            { color: "blue", x: 6, y: 3 }
+            { color: "purple", x: 2, y: 1 },
+            { color: "purple", x: 6, y: 4 },
+            { color: "orange", x: 1, y: 3 },
+            { color: "orange", x: 4, y: 3 },
+            { color: "red", x: 3, y: 0 },
+            { color: "red", x: 6, y: 2 },
+            { color: "red", x: 3, y: 4 },
+            { color: "blue", x: 2, y: 6 },
+            { color: "blue", x: 4, y: 2 }
         ],
         walls: [
-            { x: 4, y: 4 }, { x: 5, y: 4 },
-            { x: 4, y: 5 },
-            { x: 2, y: 2 }, { x: 2, y: 3 },
-            { x: 7, y: 7 }, { x: 7, y: 6 }
+            { x: 3, y: 3 }, { x: 3, y: 3 },
+            { x: 3, y: 3 },
+            { x: 1, y: 1 }, { x: 1, y: 2 },
+            { x: 5, y: 5 }, { x: 5, y: 4 }
         ]
     },
     // Level 10 - Final challenge
     {
         name: "Level 10",
-        width: 10,
-        height: 10,
+        width: 8,
+        height: 8,
         blocks: [
             {
                 id: "r1",
@@ -445,7 +445,7 @@ const LEVELS = [
                 required: 2,
                 shape: "J",
                 coords: [[1, 0], [1, 1], [1, 2], [0, 2]],
-                x: 8,
+                x: 6,
                 y: 0,
                 rotatable: true
             },
@@ -455,7 +455,7 @@ const LEVELS = [
                 required: 2,
                 shape: "T",
                 coords: [[0, 0], [1, 0], [2, 0], [1, 1]],
-                x: 3,
+                x: 2,
                 y: 0,
                 rotatable: true
             },
@@ -466,7 +466,7 @@ const LEVELS = [
                 shape: "I",
                 coords: [[0, 0], [1, 0], [2, 0], [3, 0]],
                 x: 0,
-                y: 5,
+                y: 3,
                 rotatable: true
             },
             {
@@ -475,34 +475,34 @@ const LEVELS = [
                 required: 2,
                 shape: "L",
                 coords: [[0, 0], [0, 1], [0, 2], [1, 2]],
-                x: 6,
-                y: 6,
+                x: 4,
+                y: 4,
                 rotatable: true
             }
         ],
         dogs: [
-            { color: "red", x: 8, y: 8 },
-            { color: "red", x: 3, y: 6 },
-            { color: "blue", x: 1, y: 8 },
-            { color: "blue", x: 5, y: 3 },
-            { color: "green", x: 7, y: 4 },
-            { color: "green", x: 2, y: 7 },
-            { color: "yellow", x: 6, y: 2 },
-            { color: "yellow", x: 4, y: 8 },
-            { color: "purple", x: 1, y: 3 },
-            { color: "purple", x: 8, y: 5 }
+            { color: "red", x: 6, y: 6 },
+            { color: "red", x: 2, y: 4 },
+            { color: "blue", x: 0, y: 6 },
+            { color: "blue", x: 3, y: 2 },
+            { color: "green", x: 5, y: 3 },
+            { color: "green", x: 1, y: 5 },
+            { color: "yellow", x: 4, y: 1 },
+            { color: "yellow", x: 3, y: 6 },
+            { color: "purple", x: 0, y: 2 },
+            { color: "purple", x: 6, y: 3 }
         ],
         walls: [
-            { x: 4, y: 4 }, { x: 5, y: 4 }, { x: 6, y: 4 },
-            { x: 4, y: 5 },
-            { x: 4, y: 6 }
+            { x: 3, y: 3 }, { x: 3, y: 3 }, { x: 4, y: 3 },
+            { x: 3, y: 3 },
+            { x: 3, y: 4 }
         ]
     },
     // Level 11 - Pentomino introduction
     {
         name: "Level 11",
-        width: 10,
-        height: 10,
+        width: 8,
+        height: 8,
         blocks: [
             {
                 id: "r1",
@@ -520,7 +520,7 @@ const LEVELS = [
                 required: 2,
                 shape: "L5",
                 coords: [[0, 0], [0, 1], [0, 2], [0, 3], [1, 3]],
-                x: 7,
+                x: 5,
                 y: 0,
                 rotatable: true
             },
@@ -530,29 +530,29 @@ const LEVELS = [
                 required: 1,
                 shape: "T",
                 coords: [[0, 0], [1, 0], [2, 0], [1, 1]],
-                x: 2,
-                y: 7,
+                x: 1,
+                y: 5,
                 rotatable: true
             }
         ],
         dogs: [
-            { color: "red", x: 3, y: 5 },
-            { color: "red", x: 8, y: 7 },
-            { color: "blue", x: 1, y: 3 },
-            { color: "blue", x: 5, y: 8 },
-            { color: "green", x: 6, y: 4 }
+            { color: "red", x: 2, y: 3 },
+            { color: "red", x: 6, y: 5 },
+            { color: "blue", x: 0, y: 2 },
+            { color: "blue", x: 3, y: 6 },
+            { color: "green", x: 4, y: 3 }
         ],
         walls: [
-            { x: 4, y: 3 }, { x: 5, y: 3 },
-            { x: 4, y: 4 },
-            { x: 2, y: 5 }, { x: 2, y: 6 }
+            { x: 3, y: 2 }, { x: 3, y: 2 },
+            { x: 3, y: 3 },
+            { x: 1, y: 3 }, { x: 1, y: 4 }
         ]
     },
     // Level 12 - U-shape challenge
     {
         name: "Level 12",
-        width: 10,
-        height: 10,
+        width: 8,
+        height: 8,
         blocks: [
             {
                 id: "p1",
@@ -570,7 +570,7 @@ const LEVELS = [
                 required: 2,
                 shape: "T5",
                 coords: [[0, 0], [1, 0], [2, 0], [1, 1], [1, 2]],
-                x: 6,
+                x: 4,
                 y: 0,
                 rotatable: true
             },
@@ -581,29 +581,29 @@ const LEVELS = [
                 shape: "L",
                 coords: [[0, 0], [0, 1], [0, 2], [1, 2]],
                 x: 0,
-                y: 6,
+                y: 4,
                 rotatable: true
             }
         ],
         dogs: [
-            { color: "purple", x: 4, y: 3 },
-            { color: "purple", x: 8, y: 6 },
-            { color: "orange", x: 2, y: 7 },
-            { color: "orange", x: 6, y: 8 },
-            { color: "red", x: 5, y: 2 },
-            { color: "red", x: 7, y: 4 }
+            { color: "purple", x: 3, y: 2 },
+            { color: "purple", x: 6, y: 4 },
+            { color: "orange", x: 1, y: 5 },
+            { color: "orange", x: 4, y: 6 },
+            { color: "red", x: 3, y: 1 },
+            { color: "red", x: 5, y: 3 }
         ],
         walls: [
-            { x: 3, y: 4 }, { x: 4, y: 4 }, { x: 5, y: 4 },
-            { x: 3, y: 5 }, { x: 5, y: 5 },
-            { x: 3, y: 6 }, { x: 4, y: 6 }, { x: 5, y: 6 }
+            { x: 2, y: 3 }, { x: 3, y: 3 }, { x: 3, y: 3 },
+            { x: 2, y: 3 }, { x: 3, y: 3 },
+            { x: 2, y: 4 }, { x: 3, y: 4 }, { x: 3, y: 4 }
         ]
     },
     // Level 13 - P-shape puzzle
     {
         name: "Level 13",
-        width: 10,
-        height: 10,
+        width: 8,
+        height: 8,
         blocks: [
             {
                 id: "y1",
@@ -621,7 +621,7 @@ const LEVELS = [
                 required: 2,
                 shape: "J",
                 coords: [[1, 0], [1, 1], [1, 2], [0, 2]],
-                x: 7,
+                x: 5,
                 y: 0,
                 rotatable: true
             },
@@ -631,31 +631,31 @@ const LEVELS = [
                 required: 2,
                 shape: "I",
                 coords: [[0, 0], [1, 0], [2, 0], [3, 0]],
-                x: 3,
-                y: 8,
+                x: 2,
+                y: 6,
                 rotatable: true
             }
         ],
         dogs: [
-            { color: "yellow", x: 4, y: 2 },
-            { color: "yellow", x: 7, y: 5 },
-            { color: "yellow", x: 2, y: 8 },
-            { color: "blue", x: 1, y: 5 },
-            { color: "blue", x: 8, y: 8 },
-            { color: "green", x: 5, y: 5 },
-            { color: "green", x: 3, y: 3 }
+            { color: "yellow", x: 3, y: 1 },
+            { color: "yellow", x: 5, y: 3 },
+            { color: "yellow", x: 1, y: 6 },
+            { color: "blue", x: 0, y: 3 },
+            { color: "blue", x: 6, y: 6 },
+            { color: "green", x: 3, y: 3 },
+            { color: "green", x: 2, y: 2 }
         ],
         walls: [
-            { x: 4, y: 4 }, { x: 5, y: 4 }, { x: 6, y: 4 },
-            { x: 4, y: 5 }, { x: 6, y: 5 },
-            { x: 4, y: 6 }, { x: 5, y: 6 }, { x: 6, y: 6 }
+            { x: 3, y: 3 }, { x: 3, y: 3 }, { x: 4, y: 3 },
+            { x: 3, y: 3 }, { x: 4, y: 3 },
+            { x: 3, y: 4 }, { x: 3, y: 4 }, { x: 4, y: 4 }
         ]
     },
     // Level 14 - Narrow passages
     {
         name: "Level 14",
-        width: 11,
-        height: 9,
+        width: 8,
+        height: 8,
         blocks: [
             {
                 id: "r1",
@@ -673,7 +673,7 @@ const LEVELS = [
                 required: 2,
                 shape: "I3",
                 coords: [[0, 0], [1, 0], [2, 0]],
-                x: 8,
+                x: 5,
                 y: 0,
                 rotatable: true
             },
@@ -684,7 +684,7 @@ const LEVELS = [
                 shape: "L3",
                 coords: [[0, 0], [0, 1], [1, 1]],
                 x: 0,
-                y: 6,
+                y: 5,
                 rotatable: true
             },
             {
@@ -693,32 +693,32 @@ const LEVELS = [
                 required: 2,
                 shape: "L3",
                 coords: [[0, 0], [0, 1], [1, 1]],
-                x: 9,
-                y: 6,
+                x: 6,
+                y: 5,
                 rotatable: true
             }
         ],
         dogs: [
-            { color: "red", x: 9, y: 4 },
-            { color: "red", x: 5, y: 7 },
-            { color: "blue", x: 1, y: 4 },
-            { color: "blue", x: 5, y: 1 },
-            { color: "green", x: 8, y: 7 },
-            { color: "green", x: 3, y: 3 },
-            { color: "orange", x: 2, y: 7 },
-            { color: "orange", x: 7, y: 3 }
+            { color: "red", x: 6, y: 3 },
+            { color: "red", x: 3, y: 6 },
+            { color: "blue", x: 0, y: 3 },
+            { color: "blue", x: 3, y: 0 },
+            { color: "green", x: 5, y: 6 },
+            { color: "green", x: 2, y: 2 },
+            { color: "orange", x: 1, y: 6 },
+            { color: "orange", x: 4, y: 2 }
         ],
         walls: [
-            { x: 5, y: 2 }, { x: 5, y: 3 }, { x: 5, y: 4 }, { x: 5, y: 5 }, { x: 5, y: 6 },
-            { x: 3, y: 4 }, { x: 4, y: 4 },
-            { x: 6, y: 4 }, { x: 7, y: 4 }
+            { x: 3, y: 1 }, { x: 3, y: 2 }, { x: 3, y: 3 }, { x: 3, y: 4 }, { x: 3, y: 5 },
+            { x: 2, y: 3 }, { x: 2, y: 3 },
+            { x: 4, y: 3 }, { x: 4, y: 3 }
         ]
     },
     // Level 15 - Cross traffic
     {
         name: "Level 15",
-        width: 10,
-        height: 10,
+        width: 8,
+        height: 8,
         blocks: [
             {
                 id: "r1",
@@ -736,7 +736,7 @@ const LEVELS = [
                 required: 2,
                 shape: "T",
                 coords: [[0, 0], [1, 0], [2, 0], [1, 1]],
-                x: 7,
+                x: 5,
                 y: 0,
                 rotatable: true
             },
@@ -747,7 +747,7 @@ const LEVELS = [
                 shape: "T",
                 coords: [[0, 0], [1, 0], [2, 0], [1, 1]],
                 x: 0,
-                y: 7,
+                y: 5,
                 rotatable: true
             },
             {
@@ -756,31 +756,31 @@ const LEVELS = [
                 required: 2,
                 shape: "T",
                 coords: [[0, 0], [1, 0], [2, 0], [1, 1]],
-                x: 7,
-                y: 7,
+                x: 5,
+                y: 5,
                 rotatable: true
             }
         ],
         dogs: [
-            { color: "red", x: 8, y: 8 },
-            { color: "red", x: 6, y: 5 },
-            { color: "blue", x: 1, y: 8 },
-            { color: "blue", x: 3, y: 5 },
-            { color: "green", x: 8, y: 1 },
-            { color: "green", x: 6, y: 4 },
-            { color: "yellow", x: 1, y: 1 },
-            { color: "yellow", x: 3, y: 4 }
+            { color: "red", x: 6, y: 6 },
+            { color: "red", x: 4, y: 3 },
+            { color: "blue", x: 0, y: 6 },
+            { color: "blue", x: 2, y: 3 },
+            { color: "green", x: 6, y: 0 },
+            { color: "green", x: 4, y: 3 },
+            { color: "yellow", x: 0, y: 0 },
+            { color: "yellow", x: 2, y: 3 }
         ],
         walls: [
-            { x: 4, y: 4 }, { x: 5, y: 4 },
-            { x: 4, y: 5 }
+            { x: 3, y: 3 }, { x: 3, y: 3 },
+            { x: 3, y: 3 }
         ]
     },
     // Level 16 - Six colors challenge
     {
         name: "Level 16",
-        width: 11,
-        height: 11,
+        width: 8,
+        height: 8,
         blocks: [
             {
                 id: "r1",
@@ -798,7 +798,7 @@ const LEVELS = [
                 required: 2,
                 shape: "J",
                 coords: [[1, 0], [1, 1], [1, 2], [0, 2]],
-                x: 9,
+                x: 6,
                 y: 0,
                 rotatable: true
             },
@@ -808,7 +808,7 @@ const LEVELS = [
                 required: 2,
                 shape: "T",
                 coords: [[0, 0], [1, 0], [2, 0], [1, 1]],
-                x: 4,
+                x: 2,
                 y: 0,
                 rotatable: true
             },
@@ -819,7 +819,7 @@ const LEVELS = [
                 shape: "I",
                 coords: [[0, 0], [1, 0], [2, 0], [3, 0]],
                 x: 0,
-                y: 9,
+                y: 6,
                 rotatable: true
             },
             {
@@ -828,8 +828,8 @@ const LEVELS = [
                 required: 2,
                 shape: "O",
                 coords: [[0, 0], [1, 0], [0, 1], [1, 1]],
-                x: 4,
-                y: 9,
+                x: 2,
+                y: 6,
                 rotatable: false
             },
             {
@@ -838,36 +838,36 @@ const LEVELS = [
                 required: 2,
                 shape: "I",
                 coords: [[0, 0], [1, 0], [2, 0], [3, 0]],
-                x: 7,
-                y: 9,
+                x: 4,
+                y: 6,
                 rotatable: true
             }
         ],
         dogs: [
-            { color: "red", x: 9, y: 8 },
-            { color: "red", x: 6, y: 4 },
-            { color: "blue", x: 1, y: 8 },
-            { color: "blue", x: 4, y: 4 },
-            { color: "green", x: 2, y: 5 },
-            { color: "green", x: 8, y: 5 },
-            { color: "yellow", x: 7, y: 2 },
-            { color: "yellow", x: 3, y: 7 },
-            { color: "purple", x: 1, y: 3 },
-            { color: "purple", x: 9, y: 6 },
-            { color: "orange", x: 5, y: 2 },
-            { color: "orange", x: 5, y: 7 }
+            { color: "red", x: 6, y: 5 },
+            { color: "red", x: 4, y: 2 },
+            { color: "blue", x: 0, y: 5 },
+            { color: "blue", x: 2, y: 2 },
+            { color: "green", x: 1, y: 3 },
+            { color: "green", x: 5, y: 3 },
+            { color: "yellow", x: 4, y: 1 },
+            { color: "yellow", x: 2, y: 4 },
+            { color: "purple", x: 0, y: 2 },
+            { color: "purple", x: 6, y: 4 },
+            { color: "orange", x: 3, y: 1 },
+            { color: "orange", x: 3, y: 4 }
         ],
         walls: [
-            { x: 5, y: 4 }, { x: 5, y: 5 }, { x: 5, y: 6 },
-            { x: 3, y: 5 }, { x: 4, y: 5 },
-            { x: 6, y: 5 }, { x: 7, y: 5 }
+            { x: 3, y: 2 }, { x: 3, y: 3 }, { x: 3, y: 4 },
+            { x: 2, y: 3 }, { x: 2, y: 3 },
+            { x: 4, y: 3 }, { x: 4, y: 3 }
         ]
     },
     // Level 17 - Dense obstacles
     {
         name: "Level 17",
-        width: 10,
-        height: 10,
+        width: 8,
+        height: 8,
         blocks: [
             {
                 id: "r1",
@@ -885,7 +885,7 @@ const LEVELS = [
                 required: 3,
                 shape: "L5",
                 coords: [[0, 0], [0, 1], [0, 2], [0, 3], [1, 3]],
-                x: 8,
+                x: 6,
                 y: 0,
                 rotatable: true
             },
@@ -896,33 +896,33 @@ const LEVELS = [
                 shape: "T",
                 coords: [[0, 0], [1, 0], [2, 0], [1, 1]],
                 x: 0,
-                y: 7,
+                y: 5,
                 rotatable: true
             }
         ],
         dogs: [
-            { color: "red", x: 2, y: 4 },
-            { color: "red", x: 6, y: 3 },
-            { color: "red", x: 8, y: 8 },
-            { color: "blue", x: 1, y: 6 },
-            { color: "blue", x: 4, y: 8 },
-            { color: "blue", x: 7, y: 5 },
-            { color: "green", x: 5, y: 6 },
-            { color: "green", x: 3, y: 2 }
+            { color: "red", x: 1, y: 3 },
+            { color: "red", x: 4, y: 2 },
+            { color: "red", x: 6, y: 6 },
+            { color: "blue", x: 0, y: 4 },
+            { color: "blue", x: 3, y: 6 },
+            { color: "blue", x: 5, y: 3 },
+            { color: "green", x: 3, y: 4 },
+            { color: "green", x: 2, y: 1 }
         ],
         walls: [
-            { x: 3, y: 3 }, { x: 4, y: 3 }, { x: 5, y: 3 },
-            { x: 3, y: 4 }, { x: 5, y: 4 },
-            { x: 3, y: 5 }, { x: 4, y: 5 }, { x: 5, y: 5 },
-            { x: 6, y: 6 }, { x: 7, y: 6 },
-            { x: 6, y: 7 }
+            { x: 2, y: 2 }, { x: 3, y: 2 }, { x: 3, y: 2 },
+            { x: 2, y: 3 }, { x: 3, y: 3 },
+            { x: 2, y: 3 }, { x: 3, y: 3 }, { x: 3, y: 3 },
+            { x: 4, y: 4 }, { x: 5, y: 4 },
+            { x: 4, y: 5 }
         ]
     },
     // Level 18 - Maze runner
     {
         name: "Level 18",
-        width: 12,
-        height: 10,
+        width: 8,
+        height: 8,
         blocks: [
             {
                 id: "r1",
@@ -940,7 +940,7 @@ const LEVELS = [
                 required: 2,
                 shape: "I2",
                 coords: [[0, 0], [1, 0]],
-                x: 10,
+                x: 6,
                 y: 0,
                 rotatable: true
             },
@@ -951,7 +951,7 @@ const LEVELS = [
                 shape: "I3",
                 coords: [[0, 0], [1, 0], [2, 0]],
                 x: 0,
-                y: 8,
+                y: 6,
                 rotatable: true
             },
             {
@@ -960,34 +960,34 @@ const LEVELS = [
                 required: 2,
                 shape: "I3",
                 coords: [[0, 0], [1, 0], [2, 0]],
-                x: 9,
-                y: 8,
+                x: 5,
+                y: 6,
                 rotatable: true
             }
         ],
         dogs: [
-            { color: "red", x: 10, y: 8 },
-            { color: "red", x: 6, y: 4 },
-            { color: "blue", x: 1, y: 8 },
-            { color: "blue", x: 5, y: 4 },
-            { color: "green", x: 9, y: 2 },
-            { color: "green", x: 7, y: 6 },
-            { color: "yellow", x: 2, y: 2 },
-            { color: "yellow", x: 4, y: 6 }
+            { color: "red", x: 6, y: 6 },
+            { color: "red", x: 3, y: 3 },
+            { color: "blue", x: 0, y: 6 },
+            { color: "blue", x: 3, y: 3 },
+            { color: "green", x: 5, y: 1 },
+            { color: "green", x: 4, y: 4 },
+            { color: "yellow", x: 1, y: 1 },
+            { color: "yellow", x: 2, y: 4 }
         ],
         walls: [
-            { x: 3, y: 1 }, { x: 3, y: 2 }, { x: 3, y: 3 },
-            { x: 8, y: 1 }, { x: 8, y: 2 }, { x: 8, y: 3 },
-            { x: 5, y: 5 }, { x: 6, y: 5 },
-            { x: 3, y: 6 }, { x: 3, y: 7 }, { x: 3, y: 8 },
-            { x: 8, y: 6 }, { x: 8, y: 7 }, { x: 8, y: 8 }
+            { x: 1, y: 0 }, { x: 1, y: 1 }, { x: 1, y: 2 },
+            { x: 5, y: 0 }, { x: 5, y: 1 }, { x: 5, y: 2 },
+            { x: 3, y: 3 }, { x: 3, y: 3 },
+            { x: 1, y: 4 }, { x: 1, y: 5 }, { x: 1, y: 6 },
+            { x: 5, y: 4 }, { x: 5, y: 5 }, { x: 5, y: 6 }
         ]
     },
     // Level 19 - Rotation required
     {
         name: "Level 19",
-        width: 10,
-        height: 10,
+        width: 8,
+        height: 8,
         blocks: [
             {
                 id: "r1",
@@ -995,7 +995,7 @@ const LEVELS = [
                 required: 2,
                 shape: "L",
                 coords: [[0, 0], [0, 1], [0, 2], [1, 2]],
-                x: 1,
+                x: 0,
                 y: 0,
                 rotatable: true
             },
@@ -1005,7 +1005,7 @@ const LEVELS = [
                 required: 2,
                 shape: "L",
                 coords: [[0, 0], [0, 1], [0, 2], [1, 2]],
-                x: 7,
+                x: 5,
                 y: 0,
                 rotatable: true
             },
@@ -1015,8 +1015,8 @@ const LEVELS = [
                 required: 2,
                 shape: "J",
                 coords: [[1, 0], [1, 1], [1, 2], [0, 2]],
-                x: 1,
-                y: 7,
+                x: 0,
+                y: 5,
                 rotatable: true
             },
             {
@@ -1025,33 +1025,33 @@ const LEVELS = [
                 required: 2,
                 shape: "J",
                 coords: [[1, 0], [1, 1], [1, 2], [0, 2]],
-                x: 7,
-                y: 7,
+                x: 5,
+                y: 5,
                 rotatable: true
             }
         ],
         dogs: [
-            { color: "red", x: 4, y: 7 },
-            { color: "red", x: 8, y: 5 },
-            { color: "blue", x: 5, y: 7 },
-            { color: "blue", x: 1, y: 5 },
-            { color: "green", x: 4, y: 2 },
-            { color: "green", x: 8, y: 4 },
-            { color: "yellow", x: 5, y: 2 },
-            { color: "yellow", x: 1, y: 4 }
+            { color: "red", x: 3, y: 5 },
+            { color: "red", x: 6, y: 3 },
+            { color: "blue", x: 3, y: 5 },
+            { color: "blue", x: 0, y: 3 },
+            { color: "green", x: 3, y: 1 },
+            { color: "green", x: 6, y: 3 },
+            { color: "yellow", x: 3, y: 1 },
+            { color: "yellow", x: 0, y: 3 }
         ],
         walls: [
-            { x: 4, y: 4 }, { x: 5, y: 4 },
-            { x: 4, y: 5 },
-            { x: 3, y: 3 }, { x: 6, y: 3 },
-            { x: 3, y: 6 }, { x: 6, y: 6 }
+            { x: 3, y: 3 }, { x: 3, y: 3 },
+            { x: 3, y: 3 },
+            { x: 2, y: 2 }, { x: 4, y: 2 },
+            { x: 2, y: 4 }, { x: 4, y: 4 }
         ]
     },
     // Level 20 - Multi-rescue madness
     {
         name: "Level 20",
-        width: 11,
-        height: 11,
+        width: 8,
+        height: 8,
         blocks: [
             {
                 id: "r1",
@@ -1069,7 +1069,7 @@ const LEVELS = [
                 required: 3,
                 shape: "T5",
                 coords: [[0, 0], [1, 0], [2, 0], [1, 1], [1, 2]],
-                x: 7,
+                x: 4,
                 y: 0,
                 rotatable: true
             },
@@ -1080,33 +1080,33 @@ const LEVELS = [
                 shape: "U",
                 coords: [[0, 0], [2, 0], [0, 1], [1, 1], [2, 1]],
                 x: 0,
-                y: 8,
+                y: 5,
                 rotatable: true
             }
         ],
         dogs: [
-            { color: "red", x: 2, y: 5 },
-            { color: "red", x: 5, y: 3 },
-            { color: "red", x: 9, y: 3 },
-            { color: "red", x: 3, y: 9 },
-            { color: "blue", x: 1, y: 3 },
-            { color: "blue", x: 4, y: 7 },
-            { color: "blue", x: 9, y: 9 },
-            { color: "green", x: 6, y: 2 },
-            { color: "green", x: 8, y: 7 },
-            { color: "green", x: 6, y: 9 }
+            { color: "red", x: 1, y: 3 },
+            { color: "red", x: 3, y: 2 },
+            { color: "red", x: 6, y: 2 },
+            { color: "red", x: 2, y: 6 },
+            { color: "blue", x: 0, y: 2 },
+            { color: "blue", x: 2, y: 4 },
+            { color: "blue", x: 6, y: 6 },
+            { color: "green", x: 4, y: 1 },
+            { color: "green", x: 5, y: 4 },
+            { color: "green", x: 4, y: 6 }
         ],
         walls: [
-            { x: 4, y: 4 }, { x: 5, y: 4 }, { x: 6, y: 4 },
-            { x: 4, y: 5 }, { x: 6, y: 5 },
-            { x: 4, y: 6 }, { x: 5, y: 6 }, { x: 6, y: 6 }
+            { x: 2, y: 2 }, { x: 3, y: 2 }, { x: 4, y: 2 },
+            { x: 2, y: 3 }, { x: 4, y: 3 },
+            { x: 2, y: 4 }, { x: 3, y: 4 }, { x: 4, y: 4 }
         ]
     },
     // Level 21 - Hexomino introduction
     {
         name: "Level 21",
-        width: 12,
-        height: 10,
+        width: 8,
+        height: 8,
         blocks: [
             {
                 id: "r1",
@@ -1124,7 +1124,7 @@ const LEVELS = [
                 required: 2,
                 shape: "L",
                 coords: [[0, 0], [0, 1], [0, 2], [1, 2]],
-                x: 8,
+                x: 5,
                 y: 0,
                 rotatable: true
             },
@@ -1135,7 +1135,7 @@ const LEVELS = [
                 shape: "T",
                 coords: [[0, 0], [1, 0], [2, 0], [1, 1]],
                 x: 0,
-                y: 7,
+                y: 5,
                 rotatable: true
             },
             {
@@ -1144,34 +1144,34 @@ const LEVELS = [
                 required: 2,
                 shape: "J",
                 coords: [[1, 0], [1, 1], [1, 2], [0, 2]],
-                x: 9,
-                y: 6,
+                x: 5,
+                y: 4,
                 rotatable: true
             }
         ],
         dogs: [
-            { color: "red", x: 3, y: 4 },
-            { color: "red", x: 7, y: 6 },
-            { color: "red", x: 10, y: 3 },
-            { color: "blue", x: 1, y: 5 },
-            { color: "blue", x: 5, y: 8 },
-            { color: "green", x: 8, y: 8 },
-            { color: "green", x: 4, y: 2 },
-            { color: "yellow", x: 2, y: 8 },
-            { color: "yellow", x: 6, y: 3 }
+            { color: "red", x: 1, y: 3 },
+            { color: "red", x: 4, y: 4 },
+            { color: "red", x: 6, y: 2 },
+            { color: "blue", x: 0, y: 3 },
+            { color: "blue", x: 3, y: 6 },
+            { color: "green", x: 5, y: 6 },
+            { color: "green", x: 2, y: 1 },
+            { color: "yellow", x: 1, y: 6 },
+            { color: "yellow", x: 3, y: 2 }
         ],
         walls: [
-            { x: 5, y: 3 }, { x: 6, y: 3 },
-            { x: 5, y: 4 }, { x: 7, y: 4 },
-            { x: 5, y: 5 }, { x: 6, y: 5 },
-            { x: 3, y: 6 }, { x: 4, y: 6 }
+            { x: 3, y: 2 }, { x: 3, y: 2 },
+            { x: 3, y: 3 }, { x: 4, y: 3 },
+            { x: 3, y: 3 }, { x: 3, y: 3 },
+            { x: 1, y: 4 }, { x: 2, y: 4 }
         ]
     },
     // Level 22 - C-shape challenge
     {
         name: "Level 22",
-        width: 11,
-        height: 11,
+        width: 8,
+        height: 8,
         blocks: [
             {
                 id: "p1",
@@ -1189,7 +1189,7 @@ const LEVELS = [
                 required: 3,
                 shape: "L6",
                 coords: [[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [1, 4]],
-                x: 9,
+                x: 6,
                 y: 0,
                 rotatable: true
             },
@@ -1200,7 +1200,7 @@ const LEVELS = [
                 shape: "I",
                 coords: [[0, 0], [1, 0], [2, 0], [3, 0]],
                 x: 0,
-                y: 9,
+                y: 6,
                 rotatable: true
             },
             {
@@ -1209,35 +1209,35 @@ const LEVELS = [
                 required: 2,
                 shape: "T",
                 coords: [[0, 0], [1, 0], [2, 0], [1, 1]],
-                x: 6,
-                y: 8,
+                x: 4,
+                y: 5,
                 rotatable: true
             }
         ],
         dogs: [
-            { color: "purple", x: 5, y: 2 },
-            { color: "purple", x: 8, y: 6 },
-            { color: "purple", x: 3, y: 8 },
-            { color: "orange", x: 2, y: 4 },
-            { color: "orange", x: 6, y: 5 },
-            { color: "orange", x: 4, y: 9 },
-            { color: "red", x: 8, y: 2 },
-            { color: "red", x: 9, y: 9 },
-            { color: "blue", x: 1, y: 6 },
-            { color: "blue", x: 5, y: 7 }
+            { color: "purple", x: 3, y: 1 },
+            { color: "purple", x: 5, y: 4 },
+            { color: "purple", x: 2, y: 5 },
+            { color: "orange", x: 1, y: 2 },
+            { color: "orange", x: 4, y: 3 },
+            { color: "orange", x: 2, y: 6 },
+            { color: "red", x: 5, y: 1 },
+            { color: "red", x: 6, y: 6 },
+            { color: "blue", x: 0, y: 4 },
+            { color: "blue", x: 3, y: 4 }
         ],
         walls: [
-            { x: 4, y: 3 }, { x: 5, y: 3 }, { x: 6, y: 3 },
-            { x: 4, y: 4 }, { x: 6, y: 4 },
-            { x: 4, y: 5 }, { x: 4, y: 6 },
-            { x: 7, y: 5 }, { x: 7, y: 6 }
+            { x: 2, y: 2 }, { x: 3, y: 2 }, { x: 4, y: 2 },
+            { x: 2, y: 2 }, { x: 4, y: 2 },
+            { x: 2, y: 3 }, { x: 2, y: 4 },
+            { x: 4, y: 3 }, { x: 4, y: 4 }
         ]
     },
     // Level 23 - Cramped quarters
     {
         name: "Level 23",
-        width: 9,
-        height: 9,
+        width: 8,
+        height: 8,
         blocks: [
             {
                 id: "r1",
@@ -1255,7 +1255,7 @@ const LEVELS = [
                 required: 2,
                 shape: "J",
                 coords: [[1, 0], [1, 1], [1, 2], [0, 2]],
-                x: 7,
+                x: 6,
                 y: 0,
                 rotatable: true
             },
@@ -1265,7 +1265,7 @@ const LEVELS = [
                 required: 2,
                 shape: "T",
                 coords: [[0, 0], [1, 0], [2, 0], [1, 1]],
-                x: 3,
+                x: 2,
                 y: 0,
                 rotatable: true
             },
@@ -1275,32 +1275,32 @@ const LEVELS = [
                 required: 2,
                 shape: "T",
                 coords: [[0, 0], [1, 0], [2, 0], [1, 1]],
-                x: 3,
-                y: 6,
+                x: 2,
+                y: 5,
                 rotatable: true
             }
         ],
         dogs: [
-            { color: "red", x: 7, y: 7 },
-            { color: "red", x: 5, y: 4 },
-            { color: "blue", x: 1, y: 7 },
-            { color: "blue", x: 3, y: 4 },
-            { color: "green", x: 6, y: 5 },
-            { color: "green", x: 1, y: 3 },
-            { color: "yellow", x: 2, y: 5 },
-            { color: "yellow", x: 7, y: 3 }
+            { color: "red", x: 6, y: 6 },
+            { color: "red", x: 4, y: 3 },
+            { color: "blue", x: 0, y: 6 },
+            { color: "blue", x: 2, y: 3 },
+            { color: "green", x: 5, y: 4 },
+            { color: "green", x: 0, y: 2 },
+            { color: "yellow", x: 1, y: 4 },
+            { color: "yellow", x: 6, y: 2 }
         ],
         walls: [
-            { x: 4, y: 3 }, { x: 4, y: 4 }, { x: 4, y: 5 },
-            { x: 2, y: 4 }, { x: 3, y: 4 },
-            { x: 5, y: 4 }, { x: 6, y: 4 }
+            { x: 3, y: 2 }, { x: 3, y: 3 }, { x: 3, y: 4 },
+            { x: 1, y: 3 }, { x: 2, y: 3 },
+            { x: 4, y: 3 }, { x: 5, y: 3 }
         ]
     },
     // Level 24 - Strategic blocking
     {
         name: "Level 24",
-        width: 11,
-        height: 11,
+        width: 8,
+        height: 8,
         blocks: [
             {
                 id: "r1",
@@ -1318,7 +1318,7 @@ const LEVELS = [
                 required: 3,
                 shape: "P",
                 coords: [[0, 0], [1, 0], [0, 1], [1, 1], [0, 2]],
-                x: 9,
+                x: 6,
                 y: 0,
                 rotatable: true
             },
@@ -1329,7 +1329,7 @@ const LEVELS = [
                 shape: "I",
                 coords: [[0, 0], [1, 0], [2, 0], [3, 0]],
                 x: 0,
-                y: 9,
+                y: 6,
                 rotatable: true
             },
             {
@@ -1338,35 +1338,35 @@ const LEVELS = [
                 required: 2,
                 shape: "I",
                 coords: [[0, 0], [1, 0], [2, 0], [3, 0]],
-                x: 7,
-                y: 9,
+                x: 4,
+                y: 6,
                 rotatable: true
             }
         ],
         dogs: [
-            { color: "red", x: 8, y: 3 },
-            { color: "red", x: 5, y: 6 },
-            { color: "red", x: 2, y: 8 },
-            { color: "blue", x: 2, y: 3 },
-            { color: "blue", x: 5, y: 4 },
-            { color: "blue", x: 8, y: 8 },
-            { color: "green", x: 7, y: 5 },
-            { color: "green", x: 9, y: 7 },
-            { color: "yellow", x: 3, y: 5 },
-            { color: "yellow", x: 1, y: 7 }
+            { color: "red", x: 5, y: 2 },
+            { color: "red", x: 3, y: 4 },
+            { color: "red", x: 1, y: 5 },
+            { color: "blue", x: 1, y: 2 },
+            { color: "blue", x: 3, y: 2 },
+            { color: "blue", x: 5, y: 5 },
+            { color: "green", x: 4, y: 3 },
+            { color: "green", x: 6, y: 4 },
+            { color: "yellow", x: 2, y: 3 },
+            { color: "yellow", x: 0, y: 4 }
         ],
         walls: [
-            { x: 4, y: 4 }, { x: 5, y: 4 }, { x: 6, y: 4 },
-            { x: 4, y: 5 }, { x: 6, y: 5 },
-            { x: 4, y: 6 }, { x: 5, y: 6 }, { x: 6, y: 6 },
-            { x: 5, y: 2 }, { x: 5, y: 8 }
+            { x: 2, y: 2 }, { x: 3, y: 2 }, { x: 4, y: 2 },
+            { x: 2, y: 3 }, { x: 4, y: 3 },
+            { x: 2, y: 4 }, { x: 3, y: 4 }, { x: 4, y: 4 },
+            { x: 3, y: 1 }, { x: 3, y: 5 }
         ]
     },
     // Level 25 - The gauntlet
     {
         name: "Level 25",
-        width: 12,
-        height: 10,
+        width: 8,
+        height: 8,
         blocks: [
             {
                 id: "r1",
@@ -1384,7 +1384,7 @@ const LEVELS = [
                 required: 2,
                 shape: "T5",
                 coords: [[0, 0], [1, 0], [2, 0], [1, 1], [1, 2]],
-                x: 9,
+                x: 5,
                 y: 0,
                 rotatable: true
             },
@@ -1394,7 +1394,7 @@ const LEVELS = [
                 required: 2,
                 shape: "U",
                 coords: [[0, 0], [2, 0], [0, 1], [1, 1], [2, 1]],
-                x: 4,
+                x: 2,
                 y: 0,
                 rotatable: true
             },
@@ -1405,7 +1405,7 @@ const LEVELS = [
                 shape: "P",
                 coords: [[0, 0], [1, 0], [0, 1], [1, 1], [0, 2]],
                 x: 0,
-                y: 7,
+                y: 5,
                 rotatable: true
             },
             {
@@ -1414,35 +1414,35 @@ const LEVELS = [
                 required: 2,
                 shape: "I",
                 coords: [[0, 0], [1, 0], [2, 0], [3, 0]],
-                x: 5,
-                y: 8,
+                x: 3,
+                y: 6,
                 rotatable: true
             }
         ],
         dogs: [
-            { color: "red", x: 10, y: 7 },
-            { color: "red", x: 6, y: 4 },
-            { color: "blue", x: 1, y: 7 },
-            { color: "blue", x: 5, y: 4 },
-            { color: "green", x: 3, y: 6 },
-            { color: "green", x: 8, y: 6 },
-            { color: "yellow", x: 9, y: 3 },
-            { color: "yellow", x: 4, y: 8 },
-            { color: "purple", x: 2, y: 3 },
-            { color: "purple", x: 7, y: 2 }
+            { color: "red", x: 6, y: 5 },
+            { color: "red", x: 3, y: 3 },
+            { color: "blue", x: 0, y: 5 },
+            { color: "blue", x: 3, y: 3 },
+            { color: "green", x: 1, y: 4 },
+            { color: "green", x: 5, y: 4 },
+            { color: "yellow", x: 5, y: 2 },
+            { color: "yellow", x: 2, y: 6 },
+            { color: "purple", x: 1, y: 2 },
+            { color: "purple", x: 4, y: 1 }
         ],
         walls: [
-            { x: 3, y: 3 }, { x: 4, y: 3 },
-            { x: 7, y: 3 }, { x: 8, y: 3 },
-            { x: 3, y: 5 }, { x: 4, y: 5 }, { x: 5, y: 5 },
-            { x: 6, y: 5 }, { x: 7, y: 5 }, { x: 8, y: 5 }
+            { x: 1, y: 2 }, { x: 2, y: 2 },
+            { x: 4, y: 2 }, { x: 5, y: 2 },
+            { x: 1, y: 3 }, { x: 2, y: 3 }, { x: 3, y: 3 },
+            { x: 3, y: 3 }, { x: 4, y: 3 }, { x: 5, y: 3 }
         ]
     },
     // Level 26 - Expert navigation
     {
         name: "Level 26",
-        width: 11,
-        height: 11,
+        width: 8,
+        height: 8,
         blocks: [
             {
                 id: "r1",
@@ -1460,7 +1460,7 @@ const LEVELS = [
                 required: 3,
                 shape: "L5",
                 coords: [[0, 0], [0, 1], [0, 2], [0, 3], [1, 3]],
-                x: 9,
+                x: 6,
                 y: 0,
                 rotatable: true
             },
@@ -1471,7 +1471,7 @@ const LEVELS = [
                 shape: "I5",
                 coords: [[0, 0], [1, 0], [2, 0], [3, 0], [4, 0]],
                 x: 0,
-                y: 9,
+                y: 6,
                 rotatable: true
             },
             {
@@ -1480,37 +1480,37 @@ const LEVELS = [
                 required: 2,
                 shape: "J",
                 coords: [[1, 0], [1, 1], [1, 2], [0, 2]],
-                x: 7,
-                y: 7,
+                x: 4,
+                y: 4,
                 rotatable: true
             }
         ],
         dogs: [
-            { color: "red", x: 8, y: 4 },
-            { color: "red", x: 5, y: 7 },
-            { color: "red", x: 2, y: 6 },
-            { color: "blue", x: 2, y: 3 },
-            { color: "blue", x: 5, y: 5 },
-            { color: "blue", x: 8, y: 9 },
-            { color: "green", x: 6, y: 2 },
-            { color: "green", x: 9, y: 6 },
-            { color: "green", x: 3, y: 8 },
-            { color: "orange", x: 4, y: 3 },
-            { color: "orange", x: 1, y: 5 }
+            { color: "red", x: 5, y: 2 },
+            { color: "red", x: 3, y: 4 },
+            { color: "red", x: 1, y: 4 },
+            { color: "blue", x: 1, y: 2 },
+            { color: "blue", x: 3, y: 3 },
+            { color: "blue", x: 5, y: 6 },
+            { color: "green", x: 4, y: 1 },
+            { color: "green", x: 6, y: 4 },
+            { color: "green", x: 2, y: 5 },
+            { color: "orange", x: 2, y: 2 },
+            { color: "orange", x: 0, y: 3 }
         ],
         walls: [
-            { x: 4, y: 4 }, { x: 5, y: 4 }, { x: 6, y: 4 },
-            { x: 4, y: 5 }, { x: 6, y: 5 },
-            { x: 4, y: 6 }, { x: 5, y: 6 }, { x: 6, y: 6 },
-            { x: 2, y: 2 }, { x: 8, y: 2 },
-            { x: 2, y: 8 }, { x: 8, y: 8 }
+            { x: 2, y: 2 }, { x: 3, y: 2 }, { x: 4, y: 2 },
+            { x: 2, y: 3 }, { x: 4, y: 3 },
+            { x: 2, y: 4 }, { x: 3, y: 4 }, { x: 4, y: 4 },
+            { x: 1, y: 1 }, { x: 5, y: 1 },
+            { x: 1, y: 5 }, { x: 5, y: 5 }
         ]
     },
     // Level 27 - Multi-block mayhem
     {
         name: "Level 27",
-        width: 12,
-        height: 12,
+        width: 8,
+        height: 8,
         blocks: [
             {
                 id: "r1",
@@ -1528,7 +1528,7 @@ const LEVELS = [
                 required: 2,
                 shape: "J",
                 coords: [[1, 0], [1, 1], [1, 2], [0, 2]],
-                x: 10,
+                x: 6,
                 y: 0,
                 rotatable: true
             },
@@ -1538,7 +1538,7 @@ const LEVELS = [
                 required: 2,
                 shape: "T",
                 coords: [[0, 0], [1, 0], [2, 0], [1, 1]],
-                x: 4,
+                x: 2,
                 y: 0,
                 rotatable: true
             },
@@ -1548,8 +1548,8 @@ const LEVELS = [
                 required: 2,
                 shape: "T",
                 coords: [[0, 0], [1, 0], [2, 0], [1, 1]],
-                x: 4,
-                y: 9,
+                x: 2,
+                y: 5,
                 rotatable: true
             },
             {
@@ -1559,7 +1559,7 @@ const LEVELS = [
                 shape: "I",
                 coords: [[0, 0], [1, 0], [2, 0], [3, 0]],
                 x: 0,
-                y: 10,
+                y: 6,
                 rotatable: true
             },
             {
@@ -1568,39 +1568,39 @@ const LEVELS = [
                 required: 2,
                 shape: "I",
                 coords: [[0, 0], [1, 0], [2, 0], [3, 0]],
-                x: 8,
-                y: 10,
+                x: 5,
+                y: 6,
                 rotatable: true
             }
         ],
         dogs: [
-            { color: "red", x: 9, y: 9 },
-            { color: "red", x: 6, y: 5 },
-            { color: "red", x: 2, y: 9 },
-            { color: "red", x: 5, y: 3 },
-            { color: "blue", x: 1, y: 5 },
-            { color: "blue", x: 10, y: 5 },
-            { color: "blue", x: 3, y: 7 },
-            { color: "blue", x: 8, y: 7 },
-            { color: "green", x: 5, y: 1 },
-            { color: "green", x: 6, y: 1 },
-            { color: "green", x: 3, y: 4 },
-            { color: "green", x: 8, y: 4 }
+            { color: "red", x: 5, y: 5 },
+            { color: "red", x: 3, y: 3 },
+            { color: "red", x: 1, y: 5 },
+            { color: "red", x: 3, y: 1 },
+            { color: "blue", x: 0, y: 3 },
+            { color: "blue", x: 6, y: 3 },
+            { color: "blue", x: 1, y: 4 },
+            { color: "blue", x: 5, y: 4 },
+            { color: "green", x: 3, y: 0 },
+            { color: "green", x: 3, y: 0 },
+            { color: "green", x: 1, y: 2 },
+            { color: "green", x: 5, y: 2 }
         ],
         walls: [
-            { x: 5, y: 4 }, { x: 6, y: 4 },
-            { x: 5, y: 5 },
-            { x: 5, y: 6 }, { x: 6, y: 6 },
-            { x: 3, y: 5 }, { x: 3, y: 6 },
-            { x: 8, y: 5 }, { x: 8, y: 6 },
-            { x: 4, y: 8 }, { x: 7, y: 8 }
+            { x: 3, y: 2 }, { x: 3, y: 2 },
+            { x: 3, y: 3 },
+            { x: 3, y: 3 }, { x: 3, y: 3 },
+            { x: 1, y: 3 }, { x: 1, y: 3 },
+            { x: 5, y: 3 }, { x: 5, y: 3 },
+            { x: 2, y: 5 }, { x: 4, y: 5 }
         ]
     },
     // Level 28 - Precision required
     {
         name: "Level 28",
-        width: 10,
-        height: 10,
+        width: 8,
+        height: 8,
         blocks: [
             {
                 id: "r1",
@@ -1618,7 +1618,7 @@ const LEVELS = [
                 required: 3,
                 shape: "I6",
                 coords: [[0, 0], [1, 0], [2, 0], [3, 0], [4, 0], [5, 0]],
-                x: 4,
+                x: 3,
                 y: 0,
                 rotatable: true
             },
@@ -1629,34 +1629,34 @@ const LEVELS = [
                 shape: "P",
                 coords: [[0, 0], [1, 0], [0, 1], [1, 1], [0, 2]],
                 x: 0,
-                y: 7,
+                y: 5,
                 rotatable: true
             }
         ],
         dogs: [
-            { color: "red", x: 5, y: 3 },
-            { color: "red", x: 8, y: 5 },
-            { color: "red", x: 3, y: 7 },
-            { color: "red", x: 6, y: 8 },
-            { color: "blue", x: 2, y: 4 },
-            { color: "blue", x: 5, y: 6 },
-            { color: "blue", x: 8, y: 8 },
-            { color: "green", x: 7, y: 2 },
-            { color: "green", x: 4, y: 5 },
-            { color: "green", x: 9, y: 6 }
+            { color: "red", x: 3, y: 2 },
+            { color: "red", x: 6, y: 3 },
+            { color: "red", x: 2, y: 5 },
+            { color: "red", x: 4, y: 6 },
+            { color: "blue", x: 1, y: 3 },
+            { color: "blue", x: 3, y: 4 },
+            { color: "blue", x: 6, y: 6 },
+            { color: "green", x: 5, y: 1 },
+            { color: "green", x: 3, y: 3 },
+            { color: "green", x: 7, y: 4 }
         ],
         walls: [
-            { x: 3, y: 3 }, { x: 4, y: 3 }, { x: 6, y: 3 }, { x: 7, y: 3 },
-            { x: 3, y: 4 }, { x: 7, y: 4 },
-            { x: 3, y: 5 }, { x: 7, y: 5 },
-            { x: 3, y: 6 }, { x: 4, y: 6 }, { x: 6, y: 6 }, { x: 7, y: 6 }
+            { x: 2, y: 2 }, { x: 3, y: 2 }, { x: 4, y: 2 }, { x: 5, y: 2 },
+            { x: 2, y: 3 }, { x: 5, y: 3 },
+            { x: 2, y: 3 }, { x: 5, y: 3 },
+            { x: 2, y: 4 }, { x: 3, y: 4 }, { x: 4, y: 4 }, { x: 5, y: 4 }
         ]
     },
     // Level 29 - The labyrinth
     {
         name: "Level 29",
-        width: 13,
-        height: 11,
+        width: 8,
+        height: 8,
         blocks: [
             {
                 id: "r1",
@@ -1674,7 +1674,7 @@ const LEVELS = [
                 required: 3,
                 shape: "I3",
                 coords: [[0, 0], [1, 0], [2, 0]],
-                x: 10,
+                x: 5,
                 y: 0,
                 rotatable: true
             },
@@ -1685,7 +1685,7 @@ const LEVELS = [
                 shape: "L3",
                 coords: [[0, 0], [0, 1], [1, 1]],
                 x: 0,
-                y: 8,
+                y: 5,
                 rotatable: true
             },
             {
@@ -1694,8 +1694,8 @@ const LEVELS = [
                 required: 2,
                 shape: "L3",
                 coords: [[0, 0], [0, 1], [1, 1]],
-                x: 11,
-                y: 8,
+                x: 6,
+                y: 5,
                 rotatable: true
             },
             {
@@ -1704,8 +1704,8 @@ const LEVELS = [
                 required: 2,
                 shape: "I2",
                 coords: [[0, 0], [1, 0]],
-                x: 5,
-                y: 9,
+                x: 2,
+                y: 6,
                 rotatable: true
             },
             {
@@ -1714,42 +1714,42 @@ const LEVELS = [
                 required: 2,
                 shape: "I2",
                 coords: [[0, 0], [1, 0]],
-                x: 6,
+                x: 3,
                 y: 0,
                 rotatable: true
             }
         ],
         dogs: [
-            { color: "red", x: 10, y: 9 },
-            { color: "red", x: 6, y: 5 },
-            { color: "red", x: 3, y: 7 },
-            { color: "blue", x: 2, y: 9 },
-            { color: "blue", x: 6, y: 3 },
-            { color: "blue", x: 9, y: 7 },
-            { color: "green", x: 11, y: 4 },
-            { color: "green", x: 8, y: 2 },
-            { color: "yellow", x: 1, y: 4 },
-            { color: "yellow", x: 4, y: 2 },
-            { color: "purple", x: 3, y: 5 },
-            { color: "purple", x: 9, y: 5 },
-            { color: "orange", x: 6, y: 8 },
-            { color: "orange", x: 6, y: 1 }
+            { color: "red", x: 5, y: 6 },
+            { color: "red", x: 3, y: 3 },
+            { color: "red", x: 1, y: 4 },
+            { color: "blue", x: 1, y: 6 },
+            { color: "blue", x: 3, y: 2 },
+            { color: "blue", x: 5, y: 4 },
+            { color: "green", x: 6, y: 2 },
+            { color: "green", x: 4, y: 1 },
+            { color: "yellow", x: 0, y: 2 },
+            { color: "yellow", x: 2, y: 1 },
+            { color: "purple", x: 1, y: 3 },
+            { color: "purple", x: 5, y: 3 },
+            { color: "orange", x: 3, y: 5 },
+            { color: "orange", x: 3, y: 0 }
         ],
         walls: [
-            { x: 4, y: 3 }, { x: 5, y: 3 }, { x: 7, y: 3 }, { x: 8, y: 3 },
-            { x: 4, y: 4 }, { x: 8, y: 4 },
-            { x: 4, y: 5 }, { x: 5, y: 5 }, { x: 7, y: 5 }, { x: 8, y: 5 },
-            { x: 4, y: 6 }, { x: 8, y: 6 },
-            { x: 4, y: 7 }, { x: 5, y: 7 }, { x: 7, y: 7 }, { x: 8, y: 7 },
-            { x: 2, y: 4 }, { x: 2, y: 5 }, { x: 2, y: 6 },
-            { x: 10, y: 4 }, { x: 10, y: 5 }, { x: 10, y: 6 }
+            { x: 2, y: 2 }, { x: 2, y: 2 }, { x: 4, y: 2 }, { x: 4, y: 2 },
+            { x: 2, y: 2 }, { x: 4, y: 2 },
+            { x: 2, y: 3 }, { x: 2, y: 3 }, { x: 4, y: 3 }, { x: 4, y: 3 },
+            { x: 2, y: 4 }, { x: 4, y: 4 },
+            { x: 2, y: 4 }, { x: 2, y: 4 }, { x: 4, y: 4 }, { x: 4, y: 4 },
+            { x: 1, y: 2 }, { x: 1, y: 3 }, { x: 1, y: 4 },
+            { x: 5, y: 2 }, { x: 5, y: 3 }, { x: 5, y: 4 }
         ]
     },
     // Level 30 - Ultimate challenge
     {
         name: "Level 30",
-        width: 12,
-        height: 12,
+        width: 8,
+        height: 8,
         blocks: [
             {
                 id: "r1",
@@ -1767,7 +1767,7 @@ const LEVELS = [
                 required: 3,
                 shape: "C",
                 coords: [[0, 0], [1, 0], [2, 0], [0, 1], [0, 2], [1, 2]],
-                x: 9,
+                x: 5,
                 y: 0,
                 rotatable: true
             },
@@ -1777,7 +1777,7 @@ const LEVELS = [
                 required: 3,
                 shape: "T5",
                 coords: [[0, 0], [1, 0], [2, 0], [1, 1], [1, 2]],
-                x: 4,
+                x: 2,
                 y: 0,
                 rotatable: true
             },
@@ -1788,7 +1788,7 @@ const LEVELS = [
                 shape: "U",
                 coords: [[0, 0], [2, 0], [0, 1], [1, 1], [2, 1]],
                 x: 0,
-                y: 9,
+                y: 5,
                 rotatable: true
             },
             {
@@ -1797,8 +1797,8 @@ const LEVELS = [
                 required: 2,
                 shape: "P",
                 coords: [[0, 0], [1, 0], [0, 1], [1, 1], [0, 2]],
-                x: 9,
-                y: 9,
+                x: 5,
+                y: 5,
                 rotatable: true
             },
             {
@@ -1807,37 +1807,36 @@ const LEVELS = [
                 required: 2,
                 shape: "I",
                 coords: [[0, 0], [1, 0], [2, 0], [3, 0]],
-                x: 4,
-                y: 11,
+                x: 2,
+                y: 7,
                 rotatable: true
             }
         ],
         dogs: [
-            { color: "red", x: 10, y: 7 },
-            { color: "red", x: 8, y: 9 },
-            { color: "red", x: 3, y: 8 },
-            { color: "blue", x: 1, y: 5 },
-            { color: "blue", x: 4, y: 8 },
-            { color: "blue", x: 8, y: 3 },
-            { color: "green", x: 2, y: 3 },
-            { color: "green", x: 10, y: 8 },
-            { color: "green", x: 2, y: 8 },
-            { color: "yellow", x: 8, y: 11 },
-            { color: "yellow", x: 4, y: 3 },
-            { color: "purple", x: 3, y: 11 },
-            { color: "purple", x: 7, y: 1 },
-            { color: "orange", x: 1, y: 11 },
-            { color: "orange", x: 10, y: 11 }
+            { color: "red", x: 6, y: 4 },
+            { color: "red", x: 5, y: 5 },
+            { color: "red", x: 1, y: 5 },
+            { color: "blue", x: 0, y: 3 },
+            { color: "blue", x: 2, y: 5 },
+            { color: "blue", x: 5, y: 1 },
+            { color: "green", x: 1, y: 1 },
+            { color: "green", x: 6, y: 5 },
+            { color: "green", x: 1, y: 5 },
+            { color: "yellow", x: 5, y: 7 },
+            { color: "yellow", x: 2, y: 1 },
+            { color: "purple", x: 1, y: 7 },
+            { color: "purple", x: 4, y: 0 },
+            { color: "orange", x: 0, y: 7 },
+            { color: "orange", x: 6, y: 7 }
         ],
         walls: [
-            { x: 5, y: 4 }, { x: 6, y: 4 }, { x: 7, y: 4 },
-            { x: 5, y: 5 }, { x: 7, y: 5 },
-            { x: 5, y: 6 }, { x: 6, y: 6 }, { x: 7, y: 6 },
-            { x: 3, y: 5 }, { x: 3, y: 6 },
-            { x: 9, y: 5 }, { x: 9, y: 6 }
+            { x: 3, y: 2 }, { x: 3, y: 2 }, { x: 4, y: 2 },
+            { x: 3, y: 3 }, { x: 4, y: 3 },
+            { x: 3, y: 3 }, { x: 3, y: 3 }, { x: 4, y: 3 },
+            { x: 1, y: 3 }, { x: 1, y: 3 },
+            { x: 5, y: 3 }, { x: 5, y: 3 }
         ]
-    }
-];
+    }];
 
 /**
  * Main Game Class
