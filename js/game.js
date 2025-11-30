@@ -2348,7 +2348,8 @@ class Game {
         if (gridX !== block.x || gridY !== block.y) {
             if (this.board.canBlockMoveTo(block, gridX, gridY)) {
                 this.saveState();
-                const result = this.board.moveBlock(block, gridX, gridY);
+                // Pass the starting position so dogs along the path are captured
+                const result = this.board.moveBlock(block, gridX, gridY, fromX, fromY);
                 
                 if (result.success) {
                     // Start smooth movement animation from visual position to final position

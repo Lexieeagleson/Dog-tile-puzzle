@@ -409,10 +409,16 @@ class Board {
     }
 
     /**
-     * Move a block and check for dog rescues
+     * Move a block and check for dog rescues along the entire path
+     * Dogs are captured when the block passes over them, not just when landing on them
+     * @param {Block} block - The block to move
+     * @param {number} newX - Destination X coordinate
+     * @param {number} newY - Destination Y coordinate
+     * @param {number} fromX - Starting X coordinate (optional, defaults to block's current position)
+     * @param {number} fromY - Starting Y coordinate (optional, defaults to block's current position)
      * @returns {object} Result with rescued dogs and disappeared block info
      */
-    moveBlock(block, newX, newY) {
+    moveBlock(block, newX, newY, fromX = null, fromY = null) {
         if (!this.canBlockMoveTo(block, newX, newY)) {
             return { success: false };
         }
@@ -423,14 +429,58 @@ class Board {
             blockDisappeared: false
         };
         
-        // Move the block
+        // Use provided start position or block's current position
+        const startX = fromX !== null ? fromX : block.x;
+        const startY = fromY !== null ? fromY : block.y;
+        
+        // Check for dogs along the entire path from start to destination
+        // Uses the same greedy path algorithm as the drag logic in game.js
+        // (prioritizes larger delta direction) for consistency
+        let currentX = startX;
+        let currentY = startY;
+        
+        // Safety limit based on maximum possible path length (diagonal across board)
+        const maxIterations = (this.width + this.height) * 2;
+        for (let i = 0; i < maxIterations && !result.blockDisappeared; i++) {
+            const dx = newX - currentX;
+            const dy = newY - currentY;
+            
+            // If we've reached the destination, break
+            if (dx === 0 && dy === 0) break;
+            
+            // Move one step towards destination (prioritize larger delta for consistency with drag logic)
+            if (Math.abs(dx) >= Math.abs(dy) && dx !== 0) {
+                currentX += (dx > 0 ? 1 : -1);
+            } else if (dy !== 0) {
+                currentY += (dy > 0 ? 1 : -1);
+            } else {
+                break;
+            }
+            
+            // Check for dogs at this intermediate position
+            this.checkDogsAtPosition(block, currentX, currentY, result);
+        }
+        
+        // Move the block to final position
         block.moveTo(newX, newY);
         
-        // Check for dog rescues
-        const blockCoords = block.getAbsoluteCoords();
+        return result;
+    }
+    
+    /**
+     * Check for dogs at a specific block position and rescue them if possible
+     * @param {Block} block - The block checking for dogs
+     * @param {number} posX - X position to check
+     * @param {number} posY - Y position to check
+     * @param {object} result - Result object to update with rescued dogs
+     */
+    checkDogsAtPosition(block, posX, posY, result) {
+        // Calculate absolute coordinates of the block at this position
+        const blockCoords = block.coords.map(([dx, dy]) => [posX + dx, posY + dy]);
+        
         for (const [x, y] of blockCoords) {
             const dog = this.dogManager.getDogAt(x, y);
-            if (dog && dog.canBeRescuedBy(block.color)) {
+            if (dog && dog.canBeRescuedBy(block.color) && !result.blockDisappeared) {
                 dog.rescue();
                 result.rescuedDogs.push(dog);
                 
@@ -442,8 +492,6 @@ class Board {
                 }
             }
         }
-        
-        return result;
     }
 
     /**
