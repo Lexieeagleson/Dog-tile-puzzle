@@ -714,7 +714,8 @@ const LEVELS = [
             { x: 4, y: 3 }, { x: 4, y: 3 }
         ]
     },
-    // Level 15 - Cross traffic
+    // Level 15 - Multiple blocks per color
+    // Demonstrates the ability to have multiple blocks of the same color with different required counts
     {
         name: "Level 15",
         width: 8,
@@ -723,57 +724,54 @@ const LEVELS = [
             {
                 id: "r1",
                 color: "red",
-                required: 2,
-                shape: "T",
-                coords: [[0, 0], [1, 0], [2, 0], [1, 1]],
+                required: 1,
+                shape: "L",
+                coords: [[0, 0], [0, 1], [0, 2], [1, 2]],
                 x: 0,
+                y: 0,
+                rotatable: true
+            },
+            {
+                id: "r2",
+                color: "red",
+                required: 2,
+                shape: "J",
+                coords: [[1, 0], [1, 1], [1, 2], [0, 2]],
+                x: 6,
                 y: 0,
                 rotatable: true
             },
             {
                 id: "b1",
                 color: "blue",
-                required: 2,
-                shape: "T",
-                coords: [[0, 0], [1, 0], [2, 0], [1, 1]],
-                x: 5,
-                y: 0,
-                rotatable: true
-            },
-            {
-                id: "g1",
-                color: "green",
-                required: 2,
-                shape: "T",
-                coords: [[0, 0], [1, 0], [2, 0], [1, 1]],
+                required: 1,
+                shape: "I",
+                coords: [[0, 0], [1, 0], [2, 0], [3, 0]],
                 x: 0,
                 y: 5,
                 rotatable: true
             },
             {
-                id: "y1",
-                color: "yellow",
+                id: "b2",
+                color: "blue",
                 required: 2,
                 shape: "T",
                 coords: [[0, 0], [1, 0], [2, 0], [1, 1]],
-                x: 5,
+                x: 4,
                 y: 5,
                 rotatable: true
             }
         ],
         dogs: [
-            { color: "red", x: 6, y: 6 },
-            { color: "red", x: 4, y: 3 },
-            { color: "blue", x: 0, y: 6 },
-            { color: "blue", x: 2, y: 3 },
-            { color: "green", x: 6, y: 0 },
-            { color: "green", x: 4, y: 3 },
-            { color: "yellow", x: 0, y: 0 },
-            { color: "yellow", x: 2, y: 3 }
+            { color: "red", x: 3, y: 1 },
+            { color: "red", x: 5, y: 3 },
+            { color: "red", x: 2, y: 4 },
+            { color: "blue", x: 4, y: 1 },
+            { color: "blue", x: 1, y: 3 },
+            { color: "blue", x: 6, y: 6 }
         ],
         walls: [
-            { x: 3, y: 3 }, { x: 3, y: 3 },
-            { x: 3, y: 3 }
+            { x: 3, y: 3 }, { x: 4, y: 3 }
         ]
     },
     // Level 16 - Six colors challenge
