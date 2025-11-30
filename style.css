@@ -25,12 +25,12 @@
     /* Border colors */
     --border-light: #E5E7EB;           /* Gray 200 */
     --border-medium: #D1D5DB;          /* Gray 300 */
-    --border-board: #8B7355;           /* Warm brown - distinct board border */
-    --border-board-inner: #A0896E;     /* Lighter warm brown - inner board border */
+    --border-board: #0D9488;           /* Teal 600 - distinct board border */
+    --border-board-inner: #14B8A6;     /* Teal 500 - inner board border */
     
-    /* Board backgrounds - warm cream/beige tones */
-    --bg-board-container: #FAF6F1;     /* Light warm cream container */
-    --bg-board: #FDF8F3;               /* Warm cream board background */
+    /* Board backgrounds - soft mint/teal tones */
+    --bg-board-container: #F0FDFA;     /* Teal 50 - light mint container */
+    --bg-board: #CCFBF1;               /* Teal 100 - soft mint board background */
     
     /* Button styles - Lighter than background */
     --btn-primary-bg: #6B7280;         /* Gray 500 - Lighter than background */
@@ -385,6 +385,11 @@ header h1 {
         --text-muted: #9CA3AF;
         --border-light: #374151;
         --border-medium: #4B5563;
+        /* Dark mode board colors - darker teal tones */
+        --border-board: #0F766E;           /* Teal 700 */
+        --border-board-inner: #0D9488;     /* Teal 600 */
+        --bg-board-container: #134E4A;     /* Teal 900 */
+        --bg-board: #115E59;               /* Teal 800 */
     }
     
     #game-container {
@@ -392,7 +397,7 @@ header h1 {
     }
     
     #game-board {
-        border-color: var(--border-medium);
+        border-color: var(--border-board-inner);
     }
     
     #victory-content {
