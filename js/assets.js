@@ -150,18 +150,18 @@ const ASSETS = {
         return this.svgToDataUrl(svg);
     },
 
-    // Generate empty floor tile - clean modern grid
+    // Generate empty floor tile - clean modern grid with soft mint/teal background
     generateFloorTile: function() {
         const svg = `
             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50">
                 <defs>
                     <linearGradient id="floorGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" style="stop-color:#FAFAFA;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#F4F4F5;stop-opacity:1" />
+                        <stop offset="0%" style="stop-color:#F0FDFA;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#CCFBF1;stop-opacity:1" />
                     </linearGradient>
                 </defs>
                 <rect width="50" height="50" fill="url(#floorGrad)"/>
-                <rect x="0" y="0" width="50" height="50" fill="none" stroke="#E4E4E7" stroke-width="1"/>
+                <rect x="0" y="0" width="50" height="50" fill="none" stroke="#99F6E4" stroke-width="1"/>
             </svg>
         `;
         return this.svgToDataUrl(svg);
