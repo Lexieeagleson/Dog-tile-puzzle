@@ -2063,6 +2063,18 @@ class Game {
     }
 
     /**
+     * Get the current visual drag position in grid coordinates
+     * Converts the smooth drag pixel position back to grid coordinates for animations
+     * @returns {object} Object with x and y grid coordinates (can be fractional)
+     */
+    getVisualDragPosition() {
+        return {
+            x: (this.smoothDragX - this.renderer.dragOffset.x) / this.renderer.tileSize,
+            y: (this.smoothDragY - this.renderer.dragOffset.y) / this.renderer.tileSize
+        };
+    }
+
+    /**
      * Handle mouse down
      */
     handleMouseDown(e) {
@@ -2329,9 +2341,8 @@ class Game {
         const gridX = this.lastValidGridX;
         const gridY = this.lastValidGridY;
         
-        // Store original position for animation
-        const fromX = block.x;
-        const fromY = block.y;
+        // Get the visual position where the block was during dragging
+        const visualPos = this.getVisualDragPosition();
         
         // Only save state if position actually changes
         if (gridX !== block.x || gridY !== block.y) {
@@ -2340,8 +2351,9 @@ class Game {
                 const result = this.board.moveBlock(block, gridX, gridY);
                 
                 if (result.success) {
-                    // Start smooth movement animation
-                    this.renderer.startBlockMoveAnimation(block, fromX, fromY, gridX, gridY);
+                    // Start smooth movement animation from visual position to final position
+                    // This prevents the block from jumping when released
+                    this.renderer.startBlockMoveAnimation(block, visualPos.x, visualPos.y, gridX, gridY);
                     
                     // Handle rescues
                     for (const dog of result.rescuedDogs) {
@@ -2354,6 +2366,10 @@ class Game {
                     this.checkWinCondition();
                 }
             }
+        } else {
+            // Block didn't move - animate back from visual position to original position
+            // This provides smooth "snap back" instead of a jarring jump
+            this.renderer.startBlockMoveAnimation(block, visualPos.x, visualPos.y, block.x, block.y);
         }
     }
 
@@ -2368,9 +2384,8 @@ class Game {
         const gridX = this.lastValidGridX;
         const gridY = this.lastValidGridY;
         
-        // Store original position for animation
-        const fromX = obstacle.x;
-        const fromY = obstacle.y;
+        // Get the visual position where the obstacle was during dragging
+        const visualPos = this.getVisualDragPosition();
         
         // Only save state if position actually changes
         if (gridX !== obstacle.x || gridY !== obstacle.y) {
@@ -2379,10 +2394,15 @@ class Game {
                 const result = this.board.moveObstacle(obstacle, gridX, gridY);
                 
                 if (result.success) {
-                    // Start smooth movement animation
-                    this.renderer.startObstacleMoveAnimation(obstacle, fromX, fromY, gridX, gridY);
+                    // Start smooth movement animation from visual position to final position
+                    // This prevents the obstacle from jumping when released
+                    this.renderer.startObstacleMoveAnimation(obstacle, visualPos.x, visualPos.y, gridX, gridY);
                 }
             }
+        } else {
+            // Obstacle didn't move - animate back from visual position to original position
+            // This provides smooth "snap back" instead of a jarring jump
+            this.renderer.startObstacleMoveAnimation(obstacle, visualPos.x, visualPos.y, obstacle.x, obstacle.y);
         }
     }
 
