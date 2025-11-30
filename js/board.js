@@ -434,11 +434,13 @@ class Board {
         const startY = fromY !== null ? fromY : block.y;
         
         // Check for dogs along the entire path from start to destination
-        // Move step by step and check for dogs at each position
+        // Uses the same greedy path algorithm as the drag logic in game.js
+        // (prioritizes larger delta direction) for consistency
         let currentX = startX;
         let currentY = startY;
         
-        const maxIterations = 100; // Safety limit
+        // Safety limit based on maximum possible path length (diagonal across board)
+        const maxIterations = (this.width + this.height) * 2;
         for (let i = 0; i < maxIterations && !result.blockDisappeared; i++) {
             const dx = newX - currentX;
             const dy = newY - currentY;
@@ -446,7 +448,7 @@ class Board {
             // If we've reached the destination, break
             if (dx === 0 && dy === 0) break;
             
-            // Move one step towards the destination (prioritize larger delta)
+            // Move one step towards destination (prioritize larger delta for consistency with drag logic)
             if (Math.abs(dx) >= Math.abs(dy) && dx !== 0) {
                 currentX += (dx > 0 ? 1 : -1);
             } else if (dy !== 0) {
@@ -461,11 +463,6 @@ class Board {
         
         // Move the block to final position
         block.moveTo(newX, newY);
-        
-        // Final check for dogs at the destination (in case path tracing missed any)
-        if (!result.blockDisappeared) {
-            this.checkDogsAtPosition(block, newX, newY, result);
-        }
         
         return result;
     }
